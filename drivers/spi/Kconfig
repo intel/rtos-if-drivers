@@ -1,0 +1,9 @@
+# Kconfig - SPI driver configuration options
+
+#
+# Copyright (c) 2021 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+rsource "Kconfig.spi_intel"

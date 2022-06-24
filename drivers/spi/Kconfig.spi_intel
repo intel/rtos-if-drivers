@@ -1,0 +1,19 @@
+menuconfig SPI_INTEL
+	bool "PSE SPI driver"
+	select HAS_INTEL
+	select INTEL_SPI
+	default y if SPI && BOARD_EHL_CRB
+	help
+	  This option enables the PSE SPI driver.
+	  This driver is simply a shim driver based on the SPI HAL
+	  provided by the PSE BSP.
+
+config SPI_INTEL_USE_DMA
+	depends on SPI_INTEL
+	bool "USE SPI DMA for Asynchronous Transfers"
+	select DMA
+	select DMA_INTEL
+	help
+	 This option enables UART DMA feature to be used for asynchrounous
+	 data transfers. All Tx operaton are done using dma channel 0 and
+	 all Rx operations are done using dma channel 1.
