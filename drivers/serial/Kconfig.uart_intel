@@ -1,0 +1,21 @@
+menuconfig UART_INTEL
+	bool "PSE UART driver"
+	select SERIAL_HAS_DRIVER
+	select SERIAL_SUPPORT_INTERRUPT
+	select SERIAL_SUPPORT_ASYNC
+	select HAS_INTEL
+	select INTEL_UART
+	help
+	  This option enables the PSE UART driver.
+	  This driver is simply a shim driver based on the UART driver
+	  provided by the PSE BSP.
+
+config UART_INTEL_USE_DMA
+	depends on UART_INTEL
+	bool "USE UART DMA for Asynchronous Transfers"
+	select DMA
+	select DMA_INTEL
+	help
+	 This option enables UART DMA feature to be used for asynchrounous
+	 data transfers. All Tx operaton are done using dma channel 0 and
+	 all Rx operations are done using dma channel 1.

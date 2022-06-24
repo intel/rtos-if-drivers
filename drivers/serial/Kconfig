@@ -1,0 +1,21 @@
+# Kconfig - serial driver configuration options
+
+#
+# Copyright (c) 2014-2015 Wind River Systems, Inc.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+config UART_RS_485
+	bool "Enable RS-485 support"
+	help
+	  This option adds supprt for RS485 mode of operation.
+	  Default operation would be in RS232 mode and can be configured to
+	  enable RS485 mode of operation using RS485 APIs
+
+config UART_9_BIT
+	bool "Enable 9-bit operation support"
+	help
+	  This option enables support for 9-bit operation in UART
+
+rsource "Kconfig.uart_intel"
