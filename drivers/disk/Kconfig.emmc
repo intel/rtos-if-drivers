@@ -1,0 +1,34 @@
+# Kconfig - INTEL eMMC configuration options
+#
+# Copyright (c) 2021 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+menuconfig EMMC_INTEL
+	bool "Enable INTEL eMMC driver"
+	select HAS_INTEL
+	select INTEL_EMMC
+	help
+	  INTEL eMMC driver.
+
+config EMMC_VOLUME_NAME
+	string "eMMC Disk mount point or drive name"
+	default "SD" if FAT_FILESYSTEM_ELM
+	default "SDMMC"
+	help
+	  Disk name as per file system naming guidelines.
+
+config EMMC_BUS_WIDTH
+	int "Configure emmc bus width"
+	default 8
+	help
+	  Configure eMMC bus width. Valid values: 1, 4 or 8.
+
+config FS_FATFS_FORMAT_OPTION
+	hex "Format options for formating volume"
+	default 0x02
+
+module = EMMC
+module-str = emmc
+source "subsys/logging/Kconfig.template.log_config"
