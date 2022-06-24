@@ -1,0 +1,14 @@
+# Kconfig.sedi - SEDI PWM configuration options
+#
+# Copyright (c) 2021 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+menuconfig PWM_INTEL
+	bool "SEDI PWM driver"
+	select HAS_INTEL
+	select INTEL_PWM
+	help
+	Enable the PWM driver found on Intel Microcontroller
+	boards.
