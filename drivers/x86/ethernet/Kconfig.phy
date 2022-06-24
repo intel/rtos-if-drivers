@@ -1,0 +1,34 @@
+# Kconfig - Ethernet PHY driver framework configuration options
+
+#
+# Copyright (c) 2020 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+menuconfig ETH_PHY
+	bool "Ethernet PHY driver framework"
+	depends on NET_L2_ETHERNET
+	default n
+	help
+	  Enable Ethernet PHY driver framework.
+
+if ETH_PHY
+config ETH_PHY_DEBUG
+	bool "Enable Debug"
+	default n
+	help
+	  Enable debug mode to allow more status printing from PHY.
+
+config ETH_PHY_USE_C22
+	bool "MDIO C22"
+	default n
+	help
+	  Enable PHY driver to use MDIO C22.
+
+config ETH_PHY_USE_C45
+	bool "MDIO C45"
+	default n
+	help
+	  Enable PHY driver to use MDIO C45.
+
+endif

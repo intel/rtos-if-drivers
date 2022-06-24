@@ -1,0 +1,2992 @@
+# Kconfig - Synopsys DesignWare Ethernet Quality-of-Service driver
+#			Time-Sensitive Networking configuration options
+
+#
+# Copyright (c) 2020 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+menuconfig ETH_DWC_EQOS_TBS
+	bool "TBS (Time-Based Scheduler)"
+	depends on NET_PKT_TXTIME && NET_CONTEXT_TXTIME
+	default n
+	help
+	  Enable TBS (Time-Based Scheduler) support.
+
+if ETH_DWC_EQOS_TBS
+
+config ETH_DWC_EQOS_TBS_FETCH_OFFSET
+	int "Fetch Time Offset"
+	default -1
+	range -1 999999999
+	help
+	  Configure fetch time value in 256ns unit.
+	  Value not in 256ns unit will be round down.
+	  -1 to turn off fetch ahead support.
+
+config ETH_DWC_EQOS_TBS_EXPIRY_OFFSET
+	int "Launch Time Expiry Offset"
+	default -1
+	range -1 999999999
+	help
+	  Configure launch time expiry value in 256ns unit.
+	  Value not in 256ns unit will be round down.
+	  -1 to turn off launch expiry support.
+
+
+config ETH_DWC_EQOS_0_TBS_TXQ0_ENABLE
+	bool "Queue 0: TBS enable"
+	depends on ETH_DWC_EQOS_0
+	default n
+	help
+	  Enable TBS for Tx Queue 0.
+
+config ETH_DWC_EQOS_0_TBS_TXQ1_ENABLE
+	bool "Queue 1: TBS enable"
+	depends on ETH_DWC_EQOS_0 && (ETH_DWC_EQOS_TX_QUEUES >= 2)
+	default n
+	help
+	  Enable TBS for Tx Queue 1.
+
+config ETH_DWC_EQOS_0_TBS_TXQ2_ENABLE
+	bool "Queue 2: TBS enable"
+	depends on ETH_DWC_EQOS_0 && (ETH_DWC_EQOS_TX_QUEUES >= 3)
+	default n
+	help
+	  Enable TBS for Tx Queue 2.
+
+config ETH_DWC_EQOS_0_TBS_TXQ3_ENABLE
+	bool "Queue 3: TBS enable"
+	depends on ETH_DWC_EQOS_0 && (ETH_DWC_EQOS_TX_QUEUES >= 4)
+	default n
+	help
+	  Enable TBS for Tx Queue 3.
+
+config ETH_DWC_EQOS_0_TBS_TXQ4_ENABLE
+	bool "Queue 4: TBS enable"
+	depends on ETH_DWC_EQOS_0 && (ETH_DWC_EQOS_TX_QUEUES >= 5)
+	default n
+	help
+	  Enable TBS for Tx Queue 4.
+
+config ETH_DWC_EQOS_0_TBS_TXQ5_ENABLE
+	bool "Queue 5: TBS enable"
+	depends on ETH_DWC_EQOS_0 && (ETH_DWC_EQOS_TX_QUEUES >= 6)
+	default n
+	help
+	  Enable TBS for Tx Queue 5.
+
+config ETH_DWC_EQOS_0_TBS_TXQ6_ENABLE
+	bool "Queue 6: TBS enable"
+	depends on ETH_DWC_EQOS_0 && (ETH_DWC_EQOS_TX_QUEUES >= 7)
+	default n
+	help
+	  Enable TBS for Tx Queue 6.
+
+config ETH_DWC_EQOS_0_TBS_TXQ7_ENABLE
+	bool "Queue 7: TBS enable"
+	depends on ETH_DWC_EQOS_0 && (ETH_DWC_EQOS_TX_QUEUES >= 8)
+	default n
+	help
+	  Enable TBS for Tx Queue 7.
+
+
+config ETH_DWC_EQOS_1_TBS_TXQ0_ENABLE
+	bool "Queue 0: TBS enable"
+	depends on ETH_DWC_EQOS_1
+	default n
+	help
+	  Enable TBS for Tx Queue 0.
+
+config ETH_DWC_EQOS_1_TBS_TXQ1_ENABLE
+	bool "Queue 1: TBS enable"
+	depends on ETH_DWC_EQOS_1 && (ETH_DWC_EQOS_TX_QUEUES >= 2)
+	default n
+	help
+	  Enable TBS for Tx Queue 1.
+
+config ETH_DWC_EQOS_1_TBS_TXQ2_ENABLE
+	bool "Queue 2: TBS enable"
+	depends on ETH_DWC_EQOS_1 && (ETH_DWC_EQOS_TX_QUEUES >= 3)
+	default n
+	help
+	  Enable TBS for Tx Queue 2.
+
+config ETH_DWC_EQOS_1_TBS_TXQ3_ENABLE
+	bool "Queue 3: TBS enable"
+	depends on ETH_DWC_EQOS_1 && (ETH_DWC_EQOS_TX_QUEUES >= 4)
+	default n
+	help
+	  Enable TBS for Tx Queue 3.
+
+config ETH_DWC_EQOS_1_TBS_TXQ4_ENABLE
+	bool "Queue 4: TBS enable"
+	depends on ETH_DWC_EQOS_1 && (ETH_DWC_EQOS_TX_QUEUES >= 5)
+	default n
+	help
+	  Enable TBS for Tx Queue 4.
+
+config ETH_DWC_EQOS_1_TBS_TXQ5_ENABLE
+	bool "Queue 5: TBS enable"
+	depends on ETH_DWC_EQOS_1 && (ETH_DWC_EQOS_TX_QUEUES >= 6)
+	default n
+	help
+	  Enable TBS for Tx Queue 5.
+
+config ETH_DWC_EQOS_1_TBS_TXQ6_ENABLE
+	bool "Queue 6: TBS enable"
+	depends on ETH_DWC_EQOS_1 && (ETH_DWC_EQOS_TX_QUEUES >= 7)
+	default n
+	help
+	  Enable TBS for Tx Queue 6.
+
+config ETH_DWC_EQOS_1_TBS_TXQ7_ENABLE
+	bool "Queue 7: TBS enable"
+	depends on ETH_DWC_EQOS_1 && (ETH_DWC_EQOS_TX_QUEUES >= 8)
+	default n
+	help
+	  Enable TBS for Tx Queue 7.
+
+endif # ETH_DWC_EQOS_TBS
+
+menuconfig ETH_DWC_EQOS_QAV
+	bool "IEEE 802.1Qav (Credit-Based Shaper)"
+	depends on (ETH_DWC_EQOS_TX_QUEUES >= 2)
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) support.
+
+if ETH_DWC_EQOS_QAV
+
+config ETH_DWC_EQOS_0_QAV
+	bool "802.1Qav support enable for port 0"
+	depends on ETH_DWC_EQOS_0
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) support for port 0.
+	  Note: Tx Queue 0 does not support CBS algorithm.
+
+choice
+	prompt "Port 0: Type of Qav Parameter"
+	depends on ETH_DWC_EQOS_0_QAV
+	default ETH_DWC_EQOS_0_QAV_TXQ_BANDWIDTH
+
+config ETH_DWC_EQOS_0_QAV_TXQ_BANDWIDTH
+	bool "bandwidth"
+	help
+	  Bandwidth reserved, in percentage.
+
+config ETH_DWC_EQOS_0_QAV_TXQ_IDLESLOPE
+	bool "idle slope"
+	help
+	  Rate of increase of credit, in Megabits per second.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QAV_TXQ1_ENABLE
+	bool "Port 0: Queue 1: CBS enable"
+	depends on ETH_DWC_EQOS_0_QAV
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 1.
+
+config ETH_DWC_EQOS_0_QAV_TXQ1_BANDWIDTH
+	int "Port 0: Queue 1: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ1_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 1, in percentage.
+
+config ETH_DWC_EQOS_0_QAV_TXQ1_IDLESLOPE
+	int "Port 0: Queue 1: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ1_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 1, in Megabits per second.
+	  Note: This value should not exceed link speed of port 0.
+
+config ETH_DWC_EQOS_0_QAV_TXQ2_ENABLE
+	bool "Port 0: Queue 2: CBS enable"
+	depends on ETH_DWC_EQOS_0_QAV && (ETH_DWC_EQOS_TX_QUEUES >= 3)
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 2.
+
+config ETH_DWC_EQOS_0_QAV_TXQ2_BANDWIDTH
+	int "Port 0: Queue 2: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ2_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 2, in percentage.
+
+config ETH_DWC_EQOS_0_QAV_TXQ2_IDLESLOPE
+	int "Port 0: Queue 2: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ2_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 2, in Megabits per second.
+	  Note: This value should not exceed link speed of port 0.
+
+config ETH_DWC_EQOS_0_QAV_TXQ3_ENABLE
+	bool "Port 0: Queue 3: CBS enable"
+	depends on ETH_DWC_EQOS_0_QAV && (ETH_DWC_EQOS_TX_QUEUES >= 4)
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 3.
+
+config ETH_DWC_EQOS_0_QAV_TXQ3_BANDWIDTH
+	int "Port 0: Queue 3: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ3_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 3, in percentage.
+
+config ETH_DWC_EQOS_0_QAV_TXQ3_IDLESLOPE
+	int "Port 0: Queue 3: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ3_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 3, in Megabits per second.
+	  Note: This value should not exceed link speed of port 0.
+
+config ETH_DWC_EQOS_0_QAV_TXQ4_ENABLE
+	bool "Port 0: Queue 4: CBS enable"
+	depends on ETH_DWC_EQOS_0_QAV && (ETH_DWC_EQOS_TX_QUEUES >= 5)
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 4.
+
+config ETH_DWC_EQOS_0_QAV_TXQ4_BANDWIDTH
+	int "Port 0: Queue 4: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ4_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 4, in percentage.
+
+config ETH_DWC_EQOS_0_QAV_TXQ4_IDLESLOPE
+	int "Port 0: Queue 4: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ4_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 4, in Megabits per second.
+	  Note: This value should not exceed link speed of port 0.
+
+config ETH_DWC_EQOS_0_QAV_TXQ5_ENABLE
+	bool "Port 0: Queue 5: CBS enable"
+	depends on ETH_DWC_EQOS_0_QAV && (ETH_DWC_EQOS_TX_QUEUES >= 6)
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 5.
+
+config ETH_DWC_EQOS_0_QAV_TXQ5_BANDWIDTH
+	int "Port 0: Queue 5: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ5_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 5, in percentage.
+
+config ETH_DWC_EQOS_0_QAV_TXQ5_IDLESLOPE
+	int "Port 0: Queue 5: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ5_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 5, in Megabits per second.
+	  Note: This value should not exceed link speed of port 0.
+
+config ETH_DWC_EQOS_0_QAV_TXQ6_ENABLE
+	bool "Port 0: Queue 6: CBS enable"
+	depends on ETH_DWC_EQOS_0_QAV && (ETH_DWC_EQOS_TX_QUEUES >= 7)
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 6.
+
+config ETH_DWC_EQOS_0_QAV_TXQ6_BANDWIDTH
+	int "Port 0: Queue 6: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ6_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 6, in percentage.
+
+config ETH_DWC_EQOS_0_QAV_TXQ6_IDLESLOPE
+	int "Port 0: Queue 6: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ6_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 6, in Megabits per second.
+	  Note: This value should not exceed link speed of port 0.
+
+config ETH_DWC_EQOS_0_QAV_TXQ7_ENABLE
+	bool "Port 0: Queue 7: CBS enable"
+	depends on ETH_DWC_EQOS_0_QAV && (ETH_DWC_EQOS_TX_QUEUES = 8)
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 7.
+
+config ETH_DWC_EQOS_0_QAV_TXQ7_BANDWIDTH
+	int "Port 0: Queue 7: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ7_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 7, in percentage.
+
+config ETH_DWC_EQOS_0_QAV_TXQ7_IDLESLOPE
+	int "Port 0: Queue 7: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_0_QAV_TXQ7_ENABLE && \
+		   ETH_DWC_EQOS_0_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 7, in Megabits per second.
+	  Note: This value should not exceed link speed of port 0.
+
+config ETH_DWC_EQOS_1_QAV
+	bool "802.1Qav support enable for port 1"
+	depends on ETH_DWC_EQOS_1
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) support for port 1.
+	  Note: Tx Queue 0 does not support CBS algorithm.
+
+choice
+	prompt "Port 1: Type of Qav Parameter"
+	depends on ETH_DWC_EQOS_1_QAV
+	default ETH_DWC_EQOS_1_QAV_TXQ_BANDWIDTH
+
+config ETH_DWC_EQOS_1_QAV_TXQ_BANDWIDTH
+	bool "bandwidth"
+	help
+	  Bandwidth reserved, in percentage.
+
+config ETH_DWC_EQOS_1_QAV_TXQ_IDLESLOPE
+	bool "idle slope"
+	help
+	  Rate of increase of credit, in Megabits per second.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QAV_TXQ1_ENABLE
+	bool "Port 1: Queue 1: CBS enable"
+	depends on ETH_DWC_EQOS_1_QAV
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 1.
+
+config ETH_DWC_EQOS_1_QAV_TXQ1_BANDWIDTH
+	int "Port 1: Queue 1: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ1_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 1, in percentage.
+
+config ETH_DWC_EQOS_1_QAV_TXQ1_IDLESLOPE
+	int "Port 1: Queue 1: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ1_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 1, in Megabits per second.
+	  Note: This value should not exceed link speed of port 1.
+
+config ETH_DWC_EQOS_1_QAV_TXQ2_ENABLE
+	bool "Port 1: Queue 2: CBS enable"
+	depends on ETH_DWC_EQOS_1_QAV && (ETH_DWC_EQOS_TX_QUEUES >= 3)
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 2.
+
+config ETH_DWC_EQOS_1_QAV_TXQ2_BANDWIDTH
+	int "Port 1: Queue 2: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ2_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 2, in percentage.
+
+config ETH_DWC_EQOS_1_QAV_TXQ2_IDLESLOPE
+	int "Port 1: Queue 2: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ2_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 2, in Megabits per second.
+	  Note: This value should not exceed link speed of port 1.
+
+config ETH_DWC_EQOS_1_QAV_TXQ3_ENABLE
+	bool "Port 1: Queue 3: CBS enable"
+	depends on ETH_DWC_EQOS_1_QAV && (ETH_DWC_EQOS_TX_QUEUES >= 4)
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 3.
+
+config ETH_DWC_EQOS_1_QAV_TXQ3_BANDWIDTH
+	int "Port 1: Queue 3: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ3_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 3, in percentage.
+
+config ETH_DWC_EQOS_1_QAV_TXQ3_IDLESLOPE
+	int "Port 1: Queue 3: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ3_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 3, in Megabits per second.
+	  Note: This value should not exceed link speed of port 1.
+
+config ETH_DWC_EQOS_1_QAV_TXQ4_ENABLE
+	bool "Port 1: Queue 4: CBS enable"
+	depends on ETH_DWC_EQOS_1_QAV && (ETH_DWC_EQOS_TX_QUEUES >= 5)
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 4.
+
+config ETH_DWC_EQOS_1_QAV_TXQ4_BANDWIDTH
+	int "Port 1: Queue 4: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ4_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 4, in percentage.
+
+config ETH_DWC_EQOS_1_QAV_TXQ4_IDLESLOPE
+	int "Port 1: Queue 4: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ4_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 4, in Megabits per second.
+	  Note: This value should not exceed link speed of port 1.
+
+config ETH_DWC_EQOS_1_QAV_TXQ5_ENABLE
+	bool "Port 1: Queue 5: CBS enable"
+	depends on ETH_DWC_EQOS_1_QAV && (ETH_DWC_EQOS_TX_QUEUES >= 6)
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 5.
+
+config ETH_DWC_EQOS_1_QAV_TXQ5_BANDWIDTH
+	int "Port 1: Queue 5: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ5_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 5, in percentage.
+
+config ETH_DWC_EQOS_1_QAV_TXQ5_IDLESLOPE
+	int "Port 1: Queue 5: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ5_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 5, in Megabits per second.
+	  Note: This value should not exceed link speed of port 1.
+
+config ETH_DWC_EQOS_1_QAV_TXQ6_ENABLE
+	bool "Port 1: Queue 6: CBS enable"
+	depends on ETH_DWC_EQOS_1_QAV && (ETH_DWC_EQOS_TX_QUEUES >= 7)
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 6.
+
+config ETH_DWC_EQOS_1_QAV_TXQ6_BANDWIDTH
+	int "Port 1: Queue 6: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ6_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 6, in percentage.
+
+config ETH_DWC_EQOS_1_QAV_TXQ6_IDLESLOPE
+	int "Port 1: Queue 6: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ6_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 6, in Megabits per second.
+	  Note: This value should not exceed link speed of port 1.
+
+config ETH_DWC_EQOS_1_QAV_TXQ7_ENABLE
+	bool "Port 1: Queue 7: CBS enable"
+	depends on ETH_DWC_EQOS_1_QAV && (ETH_DWC_EQOS_TX_QUEUES = 8)
+	default n
+	help
+	  Enable IEEE 802.1Qav (Credit-Based Shaper) for Tx Queue 7.
+
+config ETH_DWC_EQOS_1_QAV_TXQ7_BANDWIDTH
+	int "Port 1: Queue 7: Bandwidth (%)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ7_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_BANDWIDTH
+	default 10
+	range 1 100
+	help
+	  Bandwidth reserved for Tx Queue 7, in percentage.
+
+config ETH_DWC_EQOS_1_QAV_TXQ7_IDLESLOPE
+	int "Port 1: Queue 7: Idle slope (Mbps)"
+	depends on ETH_DWC_EQOS_1_QAV_TXQ7_ENABLE && \
+		   ETH_DWC_EQOS_1_QAV_TXQ_IDLESLOPE
+	default 100
+	range 1 1000
+	help
+	  Rate of increase of credit for Tx Queue 7, in Megabits per second.
+	  Note: This value should not exceed link speed of port 1.
+
+endif # ETH_DWC_EQOS_QAV
+
+menuconfig ETH_DWC_EQOS_QBV
+	bool "IEEE 802.1Qbv (Enhancements for Scheduled Traffic)"
+	depends on (ETH_DWC_EQOS_TX_QUEUES >= 2)
+	default n
+	help
+	  Enable IEEE 802.1Qbv (Enhancements for Scheduled Traffic) support.
+
+if ETH_DWC_EQOS_QBV
+
+config ETH_DWC_EQOS_0_QBV
+	bool "802.1Qbv support enable for port 0"
+	depends on ETH_DWC_EQOS_0
+	default n
+	help
+	  Enable IEEE 802.1Qbv (Enhancements for Scheduled Traffic) support
+	  for port 0.
+
+config ETH_DWC_EQOS_0_QBV_GCL_DEPTH
+	int "Port 0: Gate control list depth"
+	depends on ETH_DWC_EQOS_0_QBV
+	default 512
+	range 2 1024
+	help
+	  Maximum length (number of row) of gate control list.
+
+config ETH_DWC_EQOS_0_QBV_TILS
+	int "Port 0: Time interval left shift"
+	depends on ETH_DWC_EQOS_0_QBV
+	default 0
+	range 0 7
+	help
+	  The amount of left shift bits (equal to multiplication) of the
+	  time interval in gate control list.
+
+config ETH_DWC_EQOS_0_QBV_PTOV
+	int "Port 0: PTP time offset (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV
+	default 0
+	range 0 255
+	help
+	  The value of PTP clock offset needed to avoid transmission overruns
+	  at the beginning of the installation of new in gate control list,
+	  in nanosecond.
+
+config ETH_DWC_EQOS_0_QBV_CTOV
+	int "Port 0: Current time offset (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV
+	default 0
+	range 0 4095
+	help
+	  The time added to the current time to compensate for all the
+	  implementation pipeline delays, in nanosecond.
+
+config ETH_DWC_EQOS_0_QBV_ENABLE
+	bool "Port 0: EST enable"
+	depends on ETH_DWC_EQOS_0_QBV
+	default n
+	help
+	  Enable IEEE 802.1Qbv (Enhancements for Scheduled Traffic) for port 0.
+
+config ETH_DWC_EQOS_0_QBV_BTR
+	int "Port 0: Base time rounding adjustment (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE
+	default 0
+	range 0 999999999
+	help
+	  The rounding adjustment of base time (start time to execute the GCL).
+	  For example, setting this value as 500000000 ns will round the base time
+	  of GCL to 0.5 seconds.
+
+config ETH_DWC_EQOS_0_QBV_CTR_S
+	int "Port 0: Cycle time (seconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE
+	default 0
+	range 0 255
+	help
+	  The time which the execution of the gate control list should be repeated,
+	  in seconds.
+	  Note: total cycle time = cycle time (seconds) + cycle time (nanoseconds)
+
+config ETH_DWC_EQOS_0_QBV_CTR_NS
+	int "Port 0: Cycle time (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE
+	default 0
+	range 0 999999999
+	help
+	  The time which the execution of the gate control list should be repeated,
+	  in nanoseconds.
+	  Note: total cycle time = cycle time (seconds) + cycle time (nanoseconds)
+
+config ETH_DWC_EQOS_0_QBV_TER
+	int "Port 0: Extension time (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE
+	default 1000
+	range 0 4294967295
+	help
+	  The time which the current gate control list can be extended before switched
+	  to new gate control list, in nanoseconds.
+
+config ETH_DWC_EQOS_0_QBV_LLR
+	int "Port 0: Gate control list length"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE
+	default 4
+	range 1 20
+	help
+	  Total number of row in gate control list. The processing of the gate control
+	  list stops after the number of rows read equals to this value.
+
+choice
+	prompt "Port 0: Row 0: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 1)
+	default ETH_DWC_EQOS_0_QBV_GCL_R0_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R0_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R0_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 0. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R0_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 0. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R0_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 0. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R0_GS
+	hex "Port 0: Row 0: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 1)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 0.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R0_TI
+	int "Port 0: Row 0: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 1)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 0, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 1: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 2)
+	default ETH_DWC_EQOS_0_QBV_GCL_R1_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R1_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R1_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 1. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R1_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 1. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R1_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 1. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R1_GS
+	hex "Port 0: Row 1: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 2)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 1.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R1_TI
+	int "Port 0: Row 1: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 2)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 1, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 2: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 3)
+	default ETH_DWC_EQOS_0_QBV_GCL_R2_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R2_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R2_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 2. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R2_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 2. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R2_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 2. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R2_GS
+	hex "Port 0: Row 2: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 3)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 2.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R2_TI
+	int "Port 0: Row 2: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 3)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 2, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 3: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 4)
+	default ETH_DWC_EQOS_0_QBV_GCL_R3_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R3_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R3_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 3. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R3_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 3. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R3_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 3. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R3_GS
+	hex "Port 0: Row 3: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 4)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 3.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R3_TI
+	int "Port 0: Row 3: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 4)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 3, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 4: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 5)
+	default ETH_DWC_EQOS_0_QBV_GCL_R4_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R4_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R4_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 4. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R4_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 4. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R4_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 4. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R4_GS
+	hex "Port 0: Row 4: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 5)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 4.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R4_TI
+	int "Port 0: Row 4: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 5)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 4, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 5: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 6)
+	default ETH_DWC_EQOS_0_QBV_GCL_R5_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R5_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R5_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 5. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R5_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 5. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R5_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 5. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R5_GS
+	hex "Port 0: Row 5: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 6)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 5.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R5_TI
+	int "Port 0: Row 5: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 6)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 5, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 6: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 7)
+	default ETH_DWC_EQOS_0_QBV_GCL_R6_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R6_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R6_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 6. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R6_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 6. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R6_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 6. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R6_GS
+	hex "Port 0: Row 6: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 7)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 6.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R6_TI
+	int "Port 0: Row 6: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 7)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 6, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 7: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 8)
+	default ETH_DWC_EQOS_0_QBV_GCL_R7_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R7_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R7_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 7. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R7_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 7. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R7_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 7. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R7_GS
+	hex "Port 0: Row 7: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 8)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 7.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R7_TI
+	int "Port 0: Row 7: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 8)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 7, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 8: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 9)
+	default ETH_DWC_EQOS_0_QBV_GCL_R8_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R8_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R8_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 8. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R8_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 8. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R8_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 8. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R8_GS
+	hex "Port 0: Row 8: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 9)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 8.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R8_TI
+	int "Port 0: Row 8: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 9)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 8, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 9: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 10)
+	default ETH_DWC_EQOS_0_QBV_GCL_R9_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R9_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R9_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 9. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R9_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 9. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R9_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 9. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R9_GS
+	hex "Port 0: Row 9: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 10)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 9.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R9_TI
+	int "Port 0: Row 9: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 10)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 9, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 10: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 11)
+	default ETH_DWC_EQOS_0_QBV_GCL_R10_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R10_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R10_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 10. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R10_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 10. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R10_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 10. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R10_GS
+	hex "Port 0: Row 10: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 11)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 10.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R10_TI
+	int "Port 0: Row 10: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 11)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 10, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 11: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 12)
+	default ETH_DWC_EQOS_0_QBV_GCL_R11_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R11_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R11_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 11. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R11_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 11. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R11_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 11. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R11_GS
+	hex "Port 0: Row 11: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 12)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 11.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R11_TI
+	int "Port 0: Row 11: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 12)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 11, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 12: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 13)
+	default ETH_DWC_EQOS_0_QBV_GCL_R12_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R12_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R12_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 12. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R12_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 12. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R12_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 12. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R12_GS
+	hex "Port 0: Row 12: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 13)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 12.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R12_TI
+	int "Port 0: Row 12: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 13)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 12, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 13: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 14)
+	default ETH_DWC_EQOS_0_QBV_GCL_R13_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R13_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R13_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 13. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R13_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 13. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R13_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 13. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R13_GS
+	hex "Port 0: Row 13: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 14)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 13.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R13_TI
+	int "Port 0: Row 13: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 14)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 13, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 14: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 15)
+	default ETH_DWC_EQOS_0_QBV_GCL_R14_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R14_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R14_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 14. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R14_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 14. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R14_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 14. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R14_GS
+	hex "Port 0: Row 14: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 15)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 14.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R14_TI
+	int "Port 0: Row 14: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 15)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 14, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 15: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 16)
+	default ETH_DWC_EQOS_0_QBV_GCL_R15_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R15_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R15_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 15. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R15_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 15. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R15_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 15. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R15_GS
+	hex "Port 0: Row 15: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 16)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 15.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R15_TI
+	int "Port 0: Row 15: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 16)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 15, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 16: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 17)
+	default ETH_DWC_EQOS_0_QBV_GCL_R16_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R16_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R16_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 16. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R16_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 16. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R16_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 16. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R16_GS
+	hex "Port 0: Row 16: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 17)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 16.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R16_TI
+	int "Port 0: Row 16: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 17)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 16, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 17: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 18)
+	default ETH_DWC_EQOS_0_QBV_GCL_R17_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R17_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R17_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 17. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R17_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 17. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R17_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 17. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R17_GS
+	hex "Port 0: Row 17: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 18)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 17.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R17_TI
+	int "Port 0: Row 17: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 18)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 17, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 18: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 19)
+	default ETH_DWC_EQOS_0_QBV_GCL_R18_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R18_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R18_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 18. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R18_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 18. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R18_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 18. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R18_GS
+	hex "Port 0: Row 18: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 19)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 18.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R18_TI
+	int "Port 0: Row 18: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 19)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 18, in nanoseconds.
+
+choice
+	prompt "Port 0: Row 19: operation mode"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 20)
+	default ETH_DWC_EQOS_0_QBV_GCL_R19_S if !ETH_DWC_EQOS_0_QBU_ENABLE
+	default ETH_DWC_EQOS_0_QBV_GCL_R19_R if ETH_DWC_EQOS_0_QBU_ENABLE
+
+config ETH_DWC_EQOS_0_QBV_GCL_R19_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-Gate operation for row 19. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R19_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 19. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_0_QBV_GCL_R19_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_0_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 19. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_0_QBV_GCL_R19_GS
+	hex "Port 0: Row 19: gate status"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 20)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 19.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_0_QBV_GCL_R19_TI
+	int "Port 0: Row 19: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBV_ENABLE && (ETH_DWC_EQOS_0_QBV_LLR >= 20)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 19, in nanoseconds.
+
+config ETH_DWC_EQOS_1_QBV
+	bool "802.1Qbv support enable for port 1"
+	depends on ETH_DWC_EQOS_1
+	default n
+	help
+	  Enable IEEE 802.1Qbv (Enhancements for Scheduled Traffic) support
+	  for port 1.
+
+config ETH_DWC_EQOS_1_QBV_GCL_DEPTH
+	int "Port 1: Gate control list depth"
+	depends on ETH_DWC_EQOS_1_QBV
+	default 512
+	range 2 1024
+	help
+	  Maximum length (number of row) of gate control list.
+
+config ETH_DWC_EQOS_1_QBV_TILS
+	int "Port 1: Time interval left shift"
+	depends on ETH_DWC_EQOS_1_QBV
+	default 0
+	range 0 7
+	help
+	  The amount of left shift bits (equal to multiplication) of the
+	  time interval in gate control list.
+
+config ETH_DWC_EQOS_1_QBV_PTOV
+	int "Port 1: PTP time offset (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV
+	default 0
+	range 0 255
+	help
+	  The value of PTP clock offset needed to avoid transmission overruns
+	  at the beginning of the installation of new in gate control list,
+	  in nanosecond.
+
+config ETH_DWC_EQOS_1_QBV_CTOV
+	int "Port 1: Current time offset (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV
+	default 0
+	range 0 4095
+	help
+	  The time added to the current time to compensate for all the
+	  implementation pipeline delays, in nanosecond.
+
+config ETH_DWC_EQOS_1_QBV_ENABLE
+	bool "Port 1: EST enable"
+	depends on ETH_DWC_EQOS_1_QBV
+	default n
+	help
+	  Enable IEEE 802.1Qbv (Enhancements for Scheduled Traffic) for port 1.
+
+config ETH_DWC_EQOS_1_QBV_BTR
+	int "Port 1: Base time rounding adjustment (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE
+	default 0
+	range 0 999999999
+	help
+	  The rounding adjustment of base time (start time to execute the GCL).
+	  For example, setting this value as 500000000 ns will round the base time
+	  of GCL to 0.5 seconds.
+
+config ETH_DWC_EQOS_1_QBV_CTR_S
+	int "Port 1: Cycle time (seconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE
+	default 0
+	range 0 255
+	help
+	  The time which the execution of the gate control list should be repeated,
+	  in seconds.
+	  Note: total cycle time = cycle time (seconds) + cycle time (nanoseconds)
+
+config ETH_DWC_EQOS_1_QBV_CTR_NS
+	int "Port 1: Cycle time (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE
+	default 0
+	range 0 999999999
+	help
+	  The time which the execution of the gate control list should be repeated,
+	  in nanoseconds.
+	  Note: total cycle time = cycle time (seconds) + cycle time (nanoseconds)
+
+config ETH_DWC_EQOS_1_QBV_TER
+	int "Port 1: Extension time (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE
+	default 1000
+	range 0 4294967295
+	help
+	  The time which the current gate control list can be extended before switched
+	  to new gate control list, in nanoseconds.
+
+config ETH_DWC_EQOS_1_QBV_LLR
+	int "Port 1: Gate control list length"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE
+	default 4
+	range 1 20
+	help
+	  Total number of row in gate control list. The processing of the gate control
+	  list stops after the number of rows read equals to this value.
+
+choice
+	prompt "Port 1: Row 0: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 1)
+	default ETH_DWC_EQOS_1_QBV_GCL_R0_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R0_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R0_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 0. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R0_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 0. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R0_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 0. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R0_GS
+	hex "Port 1: Row 0: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 1)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 0.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R0_TI
+	int "Port 1: Row 0: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 1)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 0, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 1: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 2)
+	default ETH_DWC_EQOS_1_QBV_GCL_R1_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R1_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R1_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 1. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R1_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 1. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R1_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 1. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R1_GS
+	hex "Port 1: Row 1: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 2)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 1.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R1_TI
+	int "Port 1: Row 1: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 2)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 1, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 2: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 3)
+	default ETH_DWC_EQOS_1_QBV_GCL_R2_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R2_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R2_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 2. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R2_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 2. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R2_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 2. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R2_GS
+	hex "Port 1: Row 2: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 3)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 2.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R2_TI
+	int "Port 1: Row 2: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 3)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 2, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 3: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 4)
+	default ETH_DWC_EQOS_1_QBV_GCL_R3_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R3_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R3_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 3. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R3_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 3. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R3_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 3. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R3_GS
+	hex "Port 1: Row 3: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 4)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 3.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R3_TI
+	int "Port 1: Row 3: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 4)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 3, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 4: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 5)
+	default ETH_DWC_EQOS_1_QBV_GCL_R4_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R4_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R4_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 4. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R4_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 4. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R4_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 4. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R4_GS
+	hex "Port 1: Row 4: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 5)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 4.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R4_TI
+	int "Port 1: Row 4: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 5)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 4, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 5: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 6)
+	default ETH_DWC_EQOS_1_QBV_GCL_R5_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R5_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R5_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 5. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R5_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 5. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R5_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 5. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R5_GS
+	hex "Port 1: Row 5: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 6)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 5.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R5_TI
+	int "Port 1: Row 5: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 6)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 5, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 6: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 7)
+	default ETH_DWC_EQOS_1_QBV_GCL_R6_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R6_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R6_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 6. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R6_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 6. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R6_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 6. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R6_GS
+	hex "Port 1: Row 6: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 7)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 6.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R6_TI
+	int "Port 1: Row 6: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 7)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 6, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 7: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 8)
+	default ETH_DWC_EQOS_1_QBV_GCL_R7_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R7_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R7_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 7. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R7_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 7. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R7_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 7. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R7_GS
+	hex "Port 1: Row 7: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 8)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 7.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R7_TI
+	int "Port 1: Row 7: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 8)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 7, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 8: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 9)
+	default ETH_DWC_EQOS_1_QBV_GCL_R8_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R8_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R8_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 8. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R8_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 8. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R8_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 8. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R8_GS
+	hex "Port 1: Row 8: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 9)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 8.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R8_TI
+	int "Port 1: Row 8: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 9)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 8, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 9: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 10)
+	default ETH_DWC_EQOS_1_QBV_GCL_R9_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R9_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R9_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 9. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R9_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 9. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R9_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 9. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R9_GS
+	hex "Port 1: Row 9: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 10)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 9.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R9_TI
+	int "Port 1: Row 9: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 10)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 9, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 10: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 11)
+	default ETH_DWC_EQOS_1_QBV_GCL_R10_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R10_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R10_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 10. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R10_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 10. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R10_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 10. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R10_GS
+	hex "Port 1: Row 10: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 11)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 10.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R10_TI
+	int "Port 1: Row 10: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 11)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 10, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 11: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 12)
+	default ETH_DWC_EQOS_1_QBV_GCL_R11_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R11_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R11_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 11. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R11_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 11. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R11_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 11. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R11_GS
+	hex "Port 1: Row 11: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 12)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 11.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R11_TI
+	int "Port 1: Row 11: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 12)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 11, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 12: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 13)
+	default ETH_DWC_EQOS_1_QBV_GCL_R12_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R12_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R12_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 12. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R12_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 12. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R12_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 12. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R12_GS
+	hex "Port 1: Row 12: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 13)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 12.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R12_TI
+	int "Port 1: Row 12: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 13)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 12, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 13: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 14)
+	default ETH_DWC_EQOS_1_QBV_GCL_R13_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R13_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R13_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 13. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R13_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 13. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R13_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 13. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R13_GS
+	hex "Port 1: Row 13: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 14)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 13.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R13_TI
+	int "Port 1: Row 13: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 14)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 13, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 14: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 15)
+	default ETH_DWC_EQOS_1_QBV_GCL_R14_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R14_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R14_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 14. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R14_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 14. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R14_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 14. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R14_GS
+	hex "Port 1: Row 14: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 15)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 14.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R14_TI
+	int "Port 1: Row 14: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 15)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 14, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 15: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 16)
+	default ETH_DWC_EQOS_1_QBV_GCL_R15_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R15_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R15_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 15. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R15_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 15. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R15_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 15. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R15_GS
+	hex "Port 1: Row 15: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 16)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 15.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R15_TI
+	int "Port 1: Row 15: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 16)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 15, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 16: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 17)
+	default ETH_DWC_EQOS_1_QBV_GCL_R16_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R16_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R16_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 16. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R16_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 16. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R16_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 16. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R16_GS
+	hex "Port 1: Row 16: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 17)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 16.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R16_TI
+	int "Port 1: Row 16: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 17)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 16, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 17: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 18)
+	default ETH_DWC_EQOS_1_QBV_GCL_R17_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R17_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R17_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 17. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R17_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 17. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R17_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 17. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R17_GS
+	hex "Port 1: Row 17: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 18)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 17.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R17_TI
+	int "Port 1: Row 17: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 18)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 17, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 18: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 19)
+	default ETH_DWC_EQOS_1_QBV_GCL_R18_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R18_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R18_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 18. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R18_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 18. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R18_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 18. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R18_GS
+	hex "Port 1: Row 18: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 19)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 18.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R18_TI
+	int "Port 1: Row 18: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 19)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 18, in nanoseconds.
+
+choice
+	prompt "Port 1: Row 19: operation mode"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 20)
+	default ETH_DWC_EQOS_1_QBV_GCL_R19_S if !ETH_DWC_EQOS_1_QBU_ENABLE
+	default ETH_DWC_EQOS_1_QBV_GCL_R19_R if ETH_DWC_EQOS_1_QBU_ENABLE
+
+config ETH_DWC_EQOS_1_QBV_GCL_R19_S
+	bool "Set-Gate operation"
+	depends on !ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-Gate operation for row 19. Available when 802.1Qbu is disabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R19_H
+	bool "Set-and-Hold-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Hold-MAC operation for row 19. Available when 802.1Qbu is enabled.
+
+config ETH_DWC_EQOS_1_QBV_GCL_R19_R
+	bool "Set-and-Release-MAC operation"
+	depends on ETH_DWC_EQOS_1_QBU_ENABLE
+	help
+	  Set-and-Release-MAC operation for row 19. Available when 802.1Qbu is enabled.
+
+endchoice
+
+config ETH_DWC_EQOS_1_QBV_GCL_R19_GS
+	hex "Port 1: Row 19: gate status"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 20)
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  State for each queue (1:open, 0:close) for row 19.
+	  Example: By setting this value as 0xC9 (0b11001001),
+	  it means that Q7:open, Q6:open, Q5:close, Q4:close,
+	  Q3:open, Q2:close, Q1:close, Q0:open
+
+config ETH_DWC_EQOS_1_QBV_GCL_R19_TI
+	int "Port 1: Row 19: time interval (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBV_ENABLE && (ETH_DWC_EQOS_1_QBV_LLR >= 20)
+	default 1000
+	range 0 16777215
+	help
+	  Time interval of the gate control for row 19, in nanoseconds.
+
+endif # ETH_DWC_EQOS_QBV
+
+menuconfig ETH_DWC_EQOS_QBU
+	bool "IEEE 802.1Qbu (Frame Preemption)"
+	depends on (ETH_DWC_EQOS_TX_QUEUES >= 2)
+	default n
+	help
+	  Enable IEEE 802.1Qbu (Frame Preemption) support.
+
+if ETH_DWC_EQOS_QBU
+
+config ETH_DWC_EQOS_0_QBU
+	bool "802.1Qbu support enable for port 0"
+	depends on ETH_DWC_EQOS_0
+	default n
+	help
+	  Enable IEEE 802.1Qbu (Frame Preemption) support for port 0.
+
+config ETH_DWC_EQOS_0_QBU_HA
+	int "Port 0: Hold advance (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBU
+	default 0
+	range 0 65535
+	help
+	  The maximum time in nanoseconds that can elapse between issuing
+	  a HOLD to the MAC and the MAC ceasing to transmit any preemptable
+	  frame.
+
+config ETH_DWC_EQOS_0_QBU_RA
+	int "Port 0: Release advance (nanoseconds)"
+	depends on ETH_DWC_EQOS_0_QBU
+	default 0
+	range 0 65535
+	help
+	  The maximum time in nanoseconds that can elapse between issuing
+	  a RELEASE to the MAC and the MAC being ready to resume transmission
+	  of preemptable frames.
+
+config ETH_DWC_EQOS_0_QBU_AFSZ
+	int "Port 0: Additional fragment size"
+	depends on ETH_DWC_EQOS_0_QBU
+	default 0
+	range 0 3
+	help
+	  Used to indicate, in units of 64 bytes, the minimum number of bytes
+	  over 64 bytes required in non-final fragments of preempted frames.
+	  Note: The minimum non-final fragment size is (AFSZ +1) * 64 bytes.
+
+config ETH_DWC_EQOS_0_QBU_FPRQ
+	int "Port 0: Frame preemption residue queue"
+	depends on ETH_DWC_EQOS_0_QBU
+	default 1
+	range 1 7 if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 1 6 if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 1 5 if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 1 4 if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 1 3 if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 1 2 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 1 1
+	help
+	  Rx queue number to which the residual preemption frames must be
+	  forwarded/routed.
+	  Note: Rx queue 0 is used as a default queue for express frames,
+	  so this field cannot be programmed to a value 0.
+
+config ETH_DWC_EQOS_0_QBU_ST
+	hex "Port 0: Frame preemption status table"
+	depends on ETH_DWC_EQOS_0_QBU
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  When set indicates the corresponding queue is classified as
+	  preemptable.
+	  Note: When both EST (Qbv) and Preemption are enabled, Tx queue 0
+	  is always programmed to carry preemptable traffic.
+
+config ETH_DWC_EQOS_0_QBU_ENABLE
+	bool "Port 0: FPE enable"
+	depends on ETH_DWC_EQOS_0_QBU
+	default n
+	help
+	  Enable IEEE 802.1Qbu (frame preemption) for port 0.
+
+config ETH_DWC_EQOS_1_QBU
+	bool "802.1Qbu support enable for port 1"
+	depends on ETH_DWC_EQOS_1
+	default n
+	help
+	  Enable IEEE 802.1Qbu (Frame Preemption) support for port 1.
+
+config ETH_DWC_EQOS_1_QBU_HA
+	int "Port 1: Hold advance (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBU
+	default 0
+	range 0 65535
+	help
+	  The maximum time in nanoseconds that can elapse between issuing
+	  a HOLD to the MAC and the MAC ceasing to transmit any preemptable
+	  frame.
+
+config ETH_DWC_EQOS_1_QBU_RA
+	int "Port 1: Release advance (nanoseconds)"
+	depends on ETH_DWC_EQOS_1_QBU
+	default 0
+	range 0 65535
+	help
+	  The maximum time in nanoseconds that can elapse between issuing
+	  a RELEASE to the MAC and the MAC being ready to resume transmission
+	  of preemptable frames.
+
+config ETH_DWC_EQOS_1_QBU_AFSZ
+	int "Port 1: Additional fragment size"
+	depends on ETH_DWC_EQOS_1_QBU
+	default 0
+	range 0 3
+	help
+	  Used to indicate, in units of 64 bytes, the minimum number of bytes
+	  over 64 bytes required in non-final fragments of preempted frames.
+	  Note: The minimum non-final fragment size is (AFSZ +1) * 64 bytes.
+
+config ETH_DWC_EQOS_1_QBU_FPRQ
+	int "Port 1: Frame preemption residue queue"
+	depends on ETH_DWC_EQOS_1_QBU
+	default 1
+	range 1 7 if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 1 6 if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 1 5 if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 1 4 if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 1 3 if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 1 2 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 1 1
+	help
+	  Rx queue number to which the residual preemption frames must be
+	  forwarded/routed.
+	  Note: Rx queue 0 is used as a default queue for express frames,
+	  so this field cannot be programmed to a value 0.
+
+config ETH_DWC_EQOS_1_QBU_ST
+	hex "Port 1: Frame preemption status table"
+	depends on ETH_DWC_EQOS_1_QBU
+	default 0x01
+	range 0x00 0xFF if (ETH_DWC_EQOS_TX_QUEUES = 8)
+	range 0x00 0x7F if (ETH_DWC_EQOS_TX_QUEUES = 7)
+	range 0x00 0x3F if (ETH_DWC_EQOS_TX_QUEUES = 6)
+	range 0x00 0x1F if (ETH_DWC_EQOS_TX_QUEUES = 5)
+	range 0x00 0x0F if (ETH_DWC_EQOS_TX_QUEUES = 4)
+	range 0x00 0x07 if (ETH_DWC_EQOS_TX_QUEUES = 3)
+	range 0x00 0x03
+	help
+	  When set indicates the corresponding queue is classified as
+	  preemptable.
+	  Note: When both EST (Qbv) and Preemption are enabled, Tx queue 0
+	  is always programmed to carry preemptable traffic.
+
+config ETH_DWC_EQOS_1_QBU_ENABLE
+	bool "Port 1: FPE enable"
+	depends on ETH_DWC_EQOS_1_QBU
+	default n
+	help
+	  Enable IEEE 802.1Qbu (frame preemption) for port 1.
+
+endif # ETH_DWC_EQOS_QBU

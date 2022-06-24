@@ -1,0 +1,74 @@
+# Kconfig - Generic Phy driver configuration options
+
+#
+# Copyright (c) 2020 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+menuconfig ETH_PHY_GEN_PHY
+	bool
+	prompt "Generic Phy driver"
+	depends on NET_L2_ETHERNET
+	select ETH_PHY
+	select ETH_PHY_USE_C22
+	select ETH_PHY_POLLING_MODE
+	default n
+	help
+	  Enable Generic Phy driver.
+
+if ETH_PHY_GEN_PHY
+config ETH_PHY_GEN_PHY_TX_DLY_10
+	int "10Mbps TX delay"
+	depends on NET_GPTP
+	default 6066
+	help
+	  The default PHY interface to 10BASE-T Transmit Latency Timing.
+	  Note: Default value is just an example taken from Marvell Alaska 1G
+	  family datasheet.
+
+config ETH_PHY_GEN_PHY_TX_DLY_100
+	int "100Mbps TX delay"
+	depends on NET_GPTP
+	default 657
+	help
+	  The default PHY interface to 100BASE-TX Transmit Latency Timing.
+	  Note: Default value is just an example taken from Marvell Alaska 1G
+	  family datasheet.
+
+config ETH_PHY_GEN_PHY_TX_DLY_1000
+	int "1Gbps TX delay"
+	depends on NET_GPTP
+	default 147
+	help
+	  The default PHY interface to 1000BASE-T Transmit Latency Timing.
+	  Note: Default value is just an example taken from Marvell Alaska 1G
+	  family datasheet.
+
+config ETH_PHY_GEN_PHY_RX_DLY_10
+	int "10Mbps RX delay"
+	depends on NET_GPTP
+	default 2130
+	help
+	  10BASE-T to the default PHY interface Receive Latency Timing.
+	  Note: Default value is just an example taken from Marvell Alaska 1G
+	  family datasheet.
+
+config ETH_PHY_GEN_PHY_RX_DLY_100
+	int "100Mbps RX delay"
+	depends on NET_GPTP
+	default 362
+	help
+	  100BASE-TX to the default PHY interface Receive Latency Timing.
+	  Note: Default value is just an example taken from Marvell Alaska 1G
+	  family datasheet.
+
+config ETH_PHY_GEN_PHY_RX_DLY_1000
+	int "1Gbps RX delay"
+	depends on NET_GPTP
+	default 231
+	help
+	  1000BASE-T to the default PHY interface Receive Latency Timing.
+	  Note: Default value is just an example taken from Marvell Alaska 1G
+	  family datasheet.
+
+endif

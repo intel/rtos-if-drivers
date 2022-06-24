@@ -1,0 +1,136 @@
+# Kconfig - Marvell Phy driver configuration options
+
+#
+# Copyright (c) 2020 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+menuconfig ETH_PHY_MARVELL
+	bool
+	prompt "Marvell Phy driver"
+	depends on NET_L2_ETHERNET
+	default n
+	help
+	  Enable Marvell Phy driver.
+
+if ETH_PHY_MARVELL
+config ETH_PHY_88E1512
+	bool
+	prompt "Marvell 88E1512 Phy driver"
+	select ETH_PHY
+	select ETH_PHY_USE_C22
+	default n
+	help
+	  Enable Marvell 88E1512 Phy driver.
+
+config ETH_PHY_88E1512_EEE
+	bool "Energy Efficient Ethernet(EEE) enable"
+	depends on ETH_PHY_88E1512
+	select ETH_PHY_USE_C45
+	default n
+	help
+	  Enable EEE for link speed 100MHz and 1000MHz to
+	  help in saving energy or reducing power consumption
+	  in the PHY when no data transmission.
+
+if ETH_PHY_88E1512 && NET_GPTP
+
+config ETH_PHY_88E1512_RGMII_TX_DLY_10
+	int "10Mbps TX delay in RGMII mode"
+	default 6066
+	help
+	  Marvell 88E1512 RGMII to 10BASE-T Transmit Latency Timing.
+	  Default value is an average of TX latency mentioned in the
+	  Marvell Alaska 1G family datasheet.
+
+config ETH_PHY_88E1512_RGMII_TX_DLY_100
+	int "100Mbps TX delay in RGMII mode"
+	default 657
+	help
+	  Marvell 88E1512 RGMII to 100BASE-TX Transmit Latency Timing.
+	  Default value is an average of TX latency mentioned in the
+	  Marvell Alaska 1G family datasheet.
+
+config ETH_PHY_88E1512_RGMII_TX_DLY_1000
+	int "1Gbps TX delay in RGMII mode"
+	default 147
+	help
+	  Marvell 88E1512 RGMII to 1000BASE-T Transmit Latency Timing.
+	  Default value is an average of TX latency mentioned in the
+	  Marvell Alaska 1G family datasheet.
+
+config ETH_PHY_88E1512_SGMII_TX_DLY_10
+	int "10Mbps TX delay in SGMII mode"
+	default 5385
+	help
+	  Marvell 88E1512 SGMII to 10BASE-T Transmit Latency Timing.
+	  Default value is an average of TX latency mentioned in the
+	  Marvell Alaska 1G family datasheet.
+
+config ETH_PHY_88E1512_SGMII_TX_DLY_100
+	int "100Mbps TX delay in SGMII mode"
+	default 666
+	help
+	  Marvell 88E1512 SGMII to 100BASE-TX Transmit Latency Timing.
+	  Default value is an average of TX latency mentioned in the
+	  Marvell Alaska 1G family datasheet.
+
+config ETH_PHY_88E1512_SGMII_TX_DLY_1000
+	int "1Gbps TX delay in SGMII mode"
+	default 219
+	help
+	  Marvell 88E1512 SGMII to 1000BASE-T Transmit Latency Timing.
+	  Default value is an average of TX latency mentioned in the
+	  Marvell Alaska 1G family datasheet.
+
+config ETH_PHY_88E1512_RGMII_RX_DLY_10
+	int "10Mbps RX delay in RGMII mode"
+	default 2130
+	help
+	  Marvell 88E1512 10BASE-T to RGMII Receive Latency Timing.
+	  Default value is an average of RX latency mentioned in the
+	  Marvell Alaska 1G family datasheet.
+
+config ETH_PHY_88E1512_RGMII_RX_DLY_100
+	int "100Mbps RX delay in RGMII mode"
+	default 362
+	help
+	  Marvell 88E1512 100BASE-T to RGMII Receive Latency Timing.
+	  Default value is an average of RX latency mentioned in the
+	  Marvell Alaska 1G family datasheet.
+
+config ETH_PHY_88E1512_RGMII_RX_DLY_1000
+	int "1Gbps RX delay in RGMII mode"
+	default 231
+	help
+	  Marvell 88E1512 1000BASE-T to RGMII Receive Latency Timing.
+	  Default value is an average of RX latency mentioned in the
+	  Marvell Alaska 1G family datasheet.
+
+config ETH_PHY_88E1512_SGMII_RX_DLY_10
+	int "10Mbps RX delay in SGMII mode"
+	default 5903
+	help
+	  Marvell 88E1512 10BASE-T to SGMII Receive Latency Timing.
+	  Default value is an average of RX latency mentioned in the
+	  Marvell Alaska 1G family datasheet.
+
+config ETH_PHY_88E1512_SGMII_RX_DLY_100
+	int "100Mbps RX delay in SGMII mode"
+	default 821
+	help
+	  Marvell 88E1512 100BASE-T to SGMII Receive Latency Timing.
+	  Default value is an average of RX latency mentioned in the
+	  Marvell Alaska 1G family datasheet.
+
+config ETH_PHY_88E1512_SGMII_RX_DLY_1000
+	int "1Gbps RX delay in SGMII mode"
+	default 344
+	help
+	  Marvell 88E1512 1000BASE-T to SGMII Receive Latency Timing.
+	  Default value is an average of RX latency mentioned in the
+	  Marvell Alaska 1G family datasheet.
+
+endif # ETH_PHY_88E1512 && NET_GPTP
+
+endif # ETH_PHY_MARVELL

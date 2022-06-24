@@ -1,0 +1,31 @@
+# Kconfig -  Ethernet drivers configuration options
+
+#
+# Copyright (c) 2015 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+menu "Ethernet Drivers"
+	depends on NET_L2_ETHERNET
+
+module = ETH
+module-dep = LOG
+module-str = Log level for Ethernet driver
+module-help = Sets log level for Ethernet Device Drivers.
+source "subsys/net/Kconfig.template.log_config.net"
+
+config ETH_INIT_PRIORITY
+	int "Ethernet driver init priority"
+	default 80
+	help
+	  Ethernet device driver initialization priority.
+	  Do not mess with it unless you know what you are doing.
+	  Note that the priority needs to be lower than the net stack
+	  so that it can start before the networking sub-system.
+
+rsource "Kconfig.phy"
+rsource "Kconfig.eth_phy_marvell"
+rsource "Kconfig.eth_gen_phy"
+rsource "Kconfig.dwc_eqos_v5"
+endmenu # "Ethernet Drivers"

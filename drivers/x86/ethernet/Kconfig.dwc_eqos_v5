@@ -1,0 +1,694 @@
+# Kconfig - Synopsys DesignWare Ethernet Quality-of-Service driver
+#	    configuration options
+
+#
+# Copyright (c) 2020 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+menuconfig ETH_DWC_EQOS
+	bool
+	prompt "Synopsys DesignWare Ethernet Quality-of-Service driver"
+	depends on NET_L2_ETHERNET
+	select ETH_PHY
+	select ETH_PHY_USE_C45
+	default n
+	help
+	  Enable Synopsys DesignWare Ethernet Quality-of-Service driver.
+
+if ETH_DWC_EQOS
+config ETH_DWC_EQOS_SHARED_IRQ
+	bool
+	default n
+
+config ETH_DWC_EQOS_PCI
+	bool
+	default n
+
+config ETH_DWC_EQOS_USE_PCH
+	bool "Use PCH or PSE managed Ethernet"
+	depends on PCIE
+
+config ETH_DWC_EQOS_MSI
+	bool "Use MSI"
+	depends on PCIE_MSI_MULTI_VECTOR
+	help
+	  Use MSI to get the PCI interrupts.
+
+config ETH_DWC_EQOS_MSI_VECTORS
+	int "How many MSI vectors should be pre-allocated?"
+	default 32
+	depends on ETH_DWC_EQOS_MSI
+	help
+	  MSI vector holders must be pre-allocated. One can pre-allocate
+	  more or less than necessary.
+
+config ETH_DWC_EQOS_MSI_INT_PRIORITY
+	int "Base interrupt priority for MSI vectors"
+	default 0
+	depends on ETH_DWC_EQOS_MSI
+	help
+	  MSI vectors base interrupt priority.
+
+config ETH_DWC_EQOS_PTP
+	bool
+	default n
+
+choice
+	prompt "Platform Data"
+	default ETH_DWC_EQOS_NO_PLATDATA
+
+config ETH_DWC_EQOS_NO_PLATDATA
+	bool "None"
+	help
+	  No platform data available.
+
+config ETH_DWC_EQOS_INTEL_PSE_PLATDATA
+	bool "Intel PSE"
+	help
+	  Platform data for Intel PSE.
+
+endchoice
+
+config ETH_DWC_EQOS_TX_QUEUES
+	int "Transmit queue number"
+	default 1
+	range 1 8
+	help
+	  The total number of transmit queues are used.
+
+config ETH_DWC_EQOS_RX_QUEUES
+	int "Receive queue number"
+	default 1
+	range 1 8
+	help
+	  The total number of receive queues are used.
+
+config ETH_DWC_EQOS_DMA_RING_SIZE
+	int "Controller DMA ring entries"
+	default 4
+	range 4 1024
+	help
+	  DMA ring entry number per TX/RX queue.
+
+config ETH_DWC_EQOS_PTP_DEBUG
+	bool "Enable PTP debug"
+	depends on PTP_CLOCK && NET_PKT_TIMESTAMP
+	default n
+
+choice
+	prompt "Operation Mode"
+	default ETH_DWC_EQOS_IRQ_MODE
+
+config ETH_DWC_EQOS_IRQ_MODE
+	bool "Interrupt Mode"
+	help
+	  Interrupt trigger for status update.
+
+config ETH_DWC_EQOS_POLLING_MODE
+	bool "Polling Mode"
+	help
+	  Poll to get status update.
+
+endchoice
+
+menuconfig ETH_DWC_EQOS_INTR_COALESCE
+	bool "Interrupt Coalesce"
+	depends on ETH_DWC_EQOS_IRQ_MODE
+	help
+	  Interrupt Coalesce setting.
+
+if ETH_DWC_EQOS_INTR_COALESCE
+
+config ETH_DWC_EQOS_RXQ0_COALESCE_TIMER
+	int "Interrupt Coalesce Timer (usec) for Rx Queue 0"
+	depends on (ETH_DWC_EQOS_RX_QUEUES >= 1)
+	default 200
+	range 0 600
+	help
+	  Set the coalesce timer value for RX queue 0.
+	  Note: Programmed value may be rounded up due to
+		the non-linear setting in register. Set 0
+		to disable RX Interrupt Coalesce on this
+		queue.
+
+config ETH_DWC_EQOS_RXQ1_COALESCE_TIMER
+	int "Interrupt Coalesce Timer (usec) for Rx Queue 1"
+	depends on (ETH_DWC_EQOS_RX_QUEUES >= 2)
+	default 200
+	range 0 600
+	help
+	  Set the coalesce timer value for RX queue 1.
+	  Note: Programmed value may be rounded up due to
+		the non-linear setting in register. Set 0
+		to disable RX Interrupt Coalesce on this
+		queue.
+
+config ETH_DWC_EQOS_RXQ2_COALESCE_TIMER
+	int "Interrupt Coalesce Timer (usec) for Rx Queue 2"
+	depends on (ETH_DWC_EQOS_RX_QUEUES >= 3)
+	default 200
+	range 0 600
+	help
+	  Set the coalesce timer value for RX queue 2.
+	  Note: Programmed value may be rounded up due to
+		the non-linear setting in register. Set 0
+		to disable RX Interrupt Coalesce on this
+		queue.
+
+config ETH_DWC_EQOS_RXQ3_COALESCE_TIMER
+	int "Interrupt Coalesce Timer (usec) for Rx Queue 3"
+	depends on (ETH_DWC_EQOS_RX_QUEUES >= 4)
+	default 200
+	range 0 600
+	help
+	  Set the coalesce timer value for RX queue 3.
+	  Note: Programmed value may be rounded up due to
+		the non-linear setting in register. Set 0
+		to disable RX Interrupt Coalesce on this
+		queue.
+
+config ETH_DWC_EQOS_RXQ4_COALESCE_TIMER
+	int "Interrupt Coalesce Timer (usec) for Rx Queue 4"
+	depends on (ETH_DWC_EQOS_RX_QUEUES >= 5)
+	default 200
+	range 0 600
+	help
+	  Set the coalesce timer value for RX queue 4.
+	  Note: Programmed value may be rounded up due to
+		the non-linear setting in register. Set 0
+		to disable RX Interrupt Coalesce on this
+		queue.
+
+config ETH_DWC_EQOS_RXQ5_COALESCE_TIMER
+	int "Interrupt Coalesce Timer (usec) for Rx Queue 5"
+	depends on (ETH_DWC_EQOS_RX_QUEUES >= 6)
+	default 200
+	range 0 600
+	help
+	  Set the coalesce timer value for RX queue 5.
+	  Note: Programmed value may be rounded up due to
+		the non-linear setting in register. Set 0
+		to disable RX Interrupt Coalesce on this
+		queue.
+
+config ETH_DWC_EQOS_RXQ6_COALESCE_TIMER
+	int "Interrupt Coalesce Timer (usec) for Rx Queue 6"
+	depends on (ETH_DWC_EQOS_RX_QUEUES >= 7)
+	default 200
+	range 0 600
+	help
+	  Set the coalesce timer value for RX queue 6.
+	  Note: Programmed value may be rounded up due to
+		the non-linear setting in register. Set 0
+		to disable RX Interrupt Coalesce on this
+		queue.
+
+config ETH_DWC_EQOS_RXQ7_COALESCE_TIMER
+	int "Interrupt Coalesce Timer (usec) for Rx Queue 7"
+	depends on (ETH_DWC_EQOS_RX_QUEUES = 8)
+	default 200
+	range 0 600
+	help
+	  Set the coalesce timer value for RX queue 7.
+	  Note: Programmed value may be rounded up due to
+		the non-linear setting in register. Set 0
+		to disable RX Interrupt Coalesce on this
+		queue.
+
+endif # ETH_DWC_EQOS_INTR_COALESCE
+
+config ETH_DWC_EQOS_RX_NAPI
+	bool "RX NAPI Support"
+	default n
+	help
+	  Receive NAPI perform temporary polling to reduce
+	  the frequent of receive interrupt triggering.
+
+config ETH_DWC_EQOS_POLL_INTERVAL
+	int "Polling Mode interval in milliseconds"
+	depends on ETH_DWC_EQOS_POLLING_MODE || ETH_DWC_EQOS_RX_NAPI
+	default 10
+	range 1 1000
+	help
+	  Polling interval between status update (Max 1s).
+
+config ETH_PHY_POLLING_MODE
+	bool "PHY Polling Mode"
+	help
+	  Poll to get phy status update.
+
+config ETH_PHY_POLLING_INTERVAL
+	int "PHY Polling Mode interval in milliseconds"
+	depends on ETH_PHY_POLLING_MODE
+	default 500
+	range 10 1000
+	help
+	  PHY polling interval between status update (Max 1s).
+
+config ETH_DWC_EQOS_VLAN_STRIP
+	bool "RX VLAN Tag Stripping"
+	depends on NET_VLAN
+	default n
+	help
+	  Enable HW VLAN tag stripping for RX packets.
+
+config ETH_DWC_EQOS_FLEX_RX_PARSER
+	bool "Flexible RX Parser Filtering"
+	default n
+	help
+	  Enable HW Flexible RX Parser filtering and DMA routing.
+	  Note: Hash filtering no longer supported when selected
+		Flexible RX Parser filtering.
+
+
+
+
+config ETH_DWC_EQOS_0
+	bool "Synopsys DesignWare Ethernet Quality-of-Service port 0"
+	default n
+	help
+	 Include port 0 driver.
+
+config ETH_DWC_EQOS_0_NAME
+	string "Driver name"
+	depends on ETH_DWC_EQOS_0
+	default "ETH_DWC_EQOS_0"
+
+choice
+	prompt "Port 0 Interrupts via"
+	default ETH_DWC_EQOS_0_IRQ_MSI if PCIE_MSI_MULTI_VECTOR
+	default ETH_DWC_EQOS_0_IRQ_DIRECT
+	depends on ETH_DWC_EQOS_0 && ETH_DWC_EQOS_IRQ_MODE
+
+config ETH_DWC_EQOS_0_IRQ_DIRECT
+	bool "Direct Hardware Interrupt"
+	help
+	  When interrupts fire, the driver's ISR function is being called
+	  directly.
+
+config ETH_DWC_EQOS_0_IRQ_SHARED
+	bool "Shared IRQ"
+	depends on SHARED_IRQ
+	select ETH_DWC_EQOS_SHARED_IRQ
+	help
+	  When interrupts fire, the shared IRQ driver is notified. Then the
+	  shared IRQ driver dispatches the interrupt to other drivers.
+
+config ETH_DWC_EQOS_0_IRQ_MSI
+	bool "Via MSI"
+	depends on PCIE_MSI_MULTI_VECTOR
+	help
+	  When interrupts fire, a MSI event is generated
+
+endchoice
+
+config ETH_DWC_EQOS_0_IRQ_SHARED_NAME
+	string "Device name for Shared IRQ"
+	depends on ETH_DWC_EQOS_0 && ETH_DWC_EQOS_0_IRQ_SHARED
+	help
+	  Specify the device name for the shared IRQ driver. It is used to
+	  register this driver with the shared IRQ driver, so interrupts can
+	  be dispatched correctly.
+
+config ETH_DWC_EQOS_0_IRQ_PRI
+	int "Controller interrupt priority"
+	depends on ETH_DWC_EQOS_0 && ETH_DWC_EQOS_0_IRQ_DIRECT
+	default 0
+	help
+	  IRQ priority.
+
+config ETH_DWC_EQOS_0_PCI
+	bool "PCI Device for port 0"
+	depends on PCIE && ETH_DWC_EQOS_0
+	select ETH_DWC_EQOS_PCI
+	default n
+	help
+	  Select if Synopsys Ethernet Quality-of-Service port 0 is PCI device.
+
+config ETH_DWC_EQOS_0_PTP
+	bool "PTP clock driver support"
+	default y if PTP_CLOCK && NET_PKT_TIMESTAMP
+	depends on ETH_DWC_EQOS_0 && PTP_CLOCK && NET_PKT_TIMESTAMP
+	select ETH_DWC_EQOS_PTP
+	help
+	  Enable PTP clock support.
+
+config ETH_DWC_EQOS_0_AUTONEG
+	bool "Auto-negotiation enable"
+	depends on ETH_DWC_EQOS_0
+	default n
+	help
+	  Use auto-negotiation to obtain the best link configuration.
+
+choice
+	prompt "Port 0 Link Speed"
+	default ETH_DWC_EQOS_0_100MHZ
+	depends on ETH_DWC_EQOS_0 && !ETH_DWC_EQOS_0_AUTONEG
+
+config ETH_DWC_EQOS_0_10MHZ
+	bool "10 MHz"
+
+config ETH_DWC_EQOS_0_100MHZ
+	bool "100 MHz"
+
+config ETH_DWC_EQOS_0_1000MHZ
+	bool "1 GHz"
+
+config ETH_DWC_EQOS_0_2500MHZ
+	bool "2.5 GHz"
+
+endchoice
+
+choice
+	prompt "Port 0 Duplex Mode"
+	default ETH_DWC_EQOS_0_FULL_DUPLEX
+	depends on ETH_DWC_EQOS_0 && !ETH_DWC_EQOS_0_AUTONEG
+
+config ETH_DWC_EQOS_0_HALF_DUPLEX
+	bool "Half Duplex"
+
+config ETH_DWC_EQOS_0_FULL_DUPLEX
+	bool "Full Duplex"
+
+endchoice
+
+choice
+	prompt "Port 0 PHY"
+	default ETH_DWC_EQOS_0_PHY_88E1512
+	depends on ETH_DWC_EQOS_0
+
+config ETH_DWC_EQOS_0_PHY_88E1512
+	bool "Marvell PHY 88E1512"
+	select ETH_PHY_MARVELL
+	select ETH_PHY_88E1512
+	help
+	  Synopsys Ethernet Quality-of-Service port 0 is connected to Marvell
+	  PHY 88E1512.
+
+config ETH_DWC_EQOS_0_GEN_PHY
+	bool "Generic PHY"
+	select ETH_PHY_GEN_PHY
+	help
+	  Synopsys Ethernet Quality-of-Service port 0 is connected to Generic
+	  PHY.
+
+endchoice
+
+config ETH_DWC_EQOS_0_EEE
+	bool "Port 0 EEE Enable"
+	depends on ETH_DWC_EQOS_0_PHY_88E1512
+	help
+	  EEE is available for PHY 88E1512
+
+config LPI_ENTRY_TIMER_0
+	int "LPI Entry Timer(value must in 8 multiplier micro-seconds)"
+	depends on ETH_DWC_EQOS_0_EEE
+	default 8
+	range 8 1048568
+	help
+	  Time in microseconds the MAC waits to enter LPI mode, after
+	  it has trasmitted all the frames.
+
+config ETH_DWC_EQOS_1
+	bool "Synopsys DesignWare Ethernet Quality-of-Service port 1"
+	default n
+	help
+	 Include port 1 driver.
+
+config ETH_DWC_EQOS_1_NAME
+	string "Driver name"
+	depends on ETH_DWC_EQOS_1
+	default "ETH_DWC_EQOS_1"
+
+choice
+	prompt "Port 1 Interrupts via"
+	default ETH_DWC_EQOS_1_IRQ_DIRECT
+	depends on ETH_DWC_EQOS_1 && ETH_DWC_EQOS_IRQ_MODE
+
+config ETH_DWC_EQOS_1_IRQ_DIRECT
+	bool "Direct Hardware Interrupt"
+	help
+	  When interrupts fire, the driver's ISR function is being called
+	  directly.
+
+config ETH_DWC_EQOS_1_IRQ_SHARED
+	bool "Shared IRQ"
+	depends on SHARED_IRQ
+	select ETH_DWC_EQOS_SHARED_IRQ
+	help
+	  When interrupts fire, the shared IRQ driver is notified. Then the
+	  shared IRQ driver dispatches the interrupt to other drivers.
+
+endchoice
+
+config ETH_DWC_EQOS_1_IRQ_SHARED_NAME
+	string "Device name for Shared IRQ"
+	depends on ETH_DWC_EQOS_1 && ETH_DWC_EQOS_1_IRQ_SHARED
+	help
+	  Specify the device name for the shared IRQ driver. It is used to
+	  register this driver with the shared IRQ driver, so interrupts can
+	  be dispatched correctly.
+
+config ETH_DWC_EQOS_1_IRQ_PRI
+	int "Controller interrupt priority"
+	depends on ETH_DWC_EQOS_1 && ETH_DWC_EQOS_1_IRQ_DIRECT
+	default 0
+	help
+	  IRQ priority.
+
+config ETH_DWC_EQOS_1_PCI
+	bool "PCI Device for port 1"
+	depends on PCIE && ETH_DWC_EQOS_1
+	select ETH_DWC_EQOS_PCI
+	default n
+	help
+	  Select if Synopsys Ethernet Quality-of-Service port 1 is PCI device.
+
+config ETH_DWC_EQOS_1_PTP
+	bool "PTP clock driver support"
+	default y if PTP_CLOCK && NET_PKT_TIMESTAMP
+	depends on ETH_DWC_EQOS_1 && PTP_CLOCK && NET_PKT_TIMESTAMP
+	select ETH_DWC_EQOS_PTP
+	help
+	  Enable PTP clock support.
+
+config ETH_DWC_EQOS_1_AUTONEG
+	bool "Auto-negotiation enable"
+	depends on ETH_DWC_EQOS_1
+	default n
+	help
+	  Use auto-negotiation to obtain the best link configuration.
+
+choice
+	prompt "Port 1 Link Speed"
+	default ETH_DWC_EQOS_1_100MHZ
+	depends on ETH_DWC_EQOS_1 && !ETH_DWC_EQOS_1_AUTONEG
+
+config ETH_DWC_EQOS_1_10MHZ
+	bool "10 MHz"
+
+config ETH_DWC_EQOS_1_100MHZ
+	bool "100 MHz"
+
+config ETH_DWC_EQOS_1_1000MHZ
+	bool "1 GHz"
+
+config ETH_DWC_EQOS_1_2500MHZ
+	bool "2.5 GHz"
+
+endchoice
+
+choice
+	prompt "Port 1 Duplex Mode"
+	default ETH_DWC_EQOS_1_FULL_DUPLEX
+	depends on ETH_DWC_EQOS_1 && !ETH_DWC_EQOS_1_AUTONEG
+
+config ETH_DWC_EQOS_1_HALF_DUPLEX
+	bool "Half Duplex"
+
+config ETH_DWC_EQOS_1_FULL_DUPLEX
+	bool "Full Duplex"
+
+endchoice
+
+choice
+	prompt "Port 1 PHY"
+	default ETH_DWC_EQOS_1_PHY_88E1512
+	depends on ETH_DWC_EQOS_1
+
+config ETH_DWC_EQOS_1_PHY_88E1512
+	bool "Marvell PHY 88E1512"
+	select ETH_PHY_MARVELL
+	select ETH_PHY_88E1512
+	help
+	  Synopsys Ethernet Quality-of-Service port 1 is connected to Marvell
+	  PHY 88E1512.
+
+config ETH_DWC_EQOS_1_GEN_PHY
+	bool "Generic PHY"
+	select ETH_PHY_GEN_PHY
+	help
+	  Synopsys Ethernet Quality-of-Service port 1 is connected to Generic
+	  PHY.
+
+endchoice
+
+config ETH_DWC_EQOS_1_EEE
+	bool "Port 1 EEE Enable"
+	depends on ETH_DWC_EQOS_1_PHY_88E1512
+	help
+	  EEE is available for PHY 88E1512
+
+config LPI_ENTRY_TIMER_1
+	int "LPI Entry Timer(value must in 8 multiplier micro-seconds)"
+	depends on ETH_DWC_EQOS_1_EEE
+	default 8
+	range 8 1048568
+	help
+	  Time in microseconds the MAC waits to enter LPI mode, after
+	  it has trasmitted all the frames.
+
+config ETH_DWC_EQOS_2
+	bool "Synopsys DesignWare Ethernet Quality-of-Service port 2"
+	default n
+	help
+	 Include port 2 driver.
+
+config ETH_DWC_EQOS_2_NAME
+	string "Driver name"
+	depends on ETH_DWC_EQOS_2
+	default "ETH_DWC_EQOS_2"
+
+choice
+	prompt "Port 2 Interrupts via"
+	default ETH_DWC_EQOS_2_IRQ_DIRECT
+	depends on ETH_DWC_EQOS_2 && ETH_DWC_EQOS_IRQ_MODE
+
+config ETH_DWC_EQOS_2_IRQ_DIRECT
+	bool "Direct Hardware Interrupt"
+	help
+	  When interrupts fire, the driver's ISR function is being called
+	  directly.
+
+config ETH_DWC_EQOS_2_IRQ_SHARED
+	bool "Shared IRQ"
+	depends on SHARED_IRQ
+	select ETH_DWC_EQOS_SHARED_IRQ
+	help
+	  When interrupts fire, the shared IRQ driver is notified. Then the
+	  shared IRQ driver dispatches the interrupt to other drivers.
+
+endchoice
+
+config ETH_DWC_EQOS_2_IRQ_SHARED_NAME
+	string "Device name for Shared IRQ"
+	depends on ETH_DWC_EQOS_2 && ETH_DWC_EQOS_2_IRQ_SHARED
+	help
+	  Specify the device name for the shared IRQ driver. It is used to
+	  register this driver with the shared IRQ driver, so interrupts can
+	  be dispatched correctly.
+
+config ETH_DWC_EQOS_2_IRQ_PRI
+	int "Controller interrupt priority"
+	depends on ETH_DWC_EQOS_2 && ETH_DWC_EQOS_2_IRQ_DIRECT
+	default 0
+	help
+	  IRQ priority.
+
+config ETH_DWC_EQOS_2_PCI
+	bool "PCI Device for port 2"
+	depends on PCIE && ETH_DWC_EQOS_2
+	select ETH_DWC_EQOS_PCI
+	default n
+	help
+	  Select if Synopsys Ethernet Quality-of-Service port 2 is PCI device.
+
+config ETH_DWC_EQOS_2_PTP
+	bool "PTP clock driver support"
+	default y if PTP_CLOCK && NET_PKT_TIMESTAMP
+	depends on ETH_DWC_EQOS_2 && PTP_CLOCK && NET_PKT_TIMESTAMP
+	select ETH_DWC_EQOS_PTP
+	help
+	  Enable PTP clock support.
+
+config ETH_DWC_EQOS_2_AUTONEG
+	bool "Auto-negotiation enable"
+	depends on ETH_DWC_EQOS_2
+	default n
+	help
+	  Use auto-negotiation to obtain the best link configuration.
+
+choice
+	prompt "Port 2 Link Speed"
+	default ETH_DWC_EQOS_2_100MHZ
+	depends on ETH_DWC_EQOS_2 && !ETH_DWC_EQOS_2_AUTONEG
+
+config ETH_DWC_EQOS_2_10MHZ
+	bool "10 MHz"
+
+config ETH_DWC_EQOS_2_100MHZ
+	bool "100 MHz"
+
+config ETH_DWC_EQOS_2_1000MHZ
+	bool "1 GHz"
+
+config ETH_DWC_EQOS_2_2500MHZ
+	bool "2.5 GHz"
+
+endchoice
+
+choice
+	prompt "Port 2 Duplex Mode"
+	default ETH_DWC_EQOS_2_FULL_DUPLEX
+	depends on ETH_DWC_EQOS_2 && !ETH_DWC_EQOS_2_AUTONEG
+
+config ETH_DWC_EQOS_2_HALF_DUPLEX
+	bool "Half Duplex"
+
+config ETH_DWC_EQOS_2_FULL_DUPLEX
+	bool "Full Duplex"
+
+endchoice
+
+choice
+	prompt "Port 2 PHY"
+	default ETH_DWC_EQOS_2_PHY_88E1512
+	depends on ETH_DWC_EQOS_2
+
+config ETH_DWC_EQOS_2_PHY_88E1512
+	bool "Marvell PHY 88E1512"
+	select ETH_PHY_MARVELL
+	select ETH_PHY_88E1512
+	help
+	  Synopsys Ethernet Quality-of-Service port 2 is connected to Marvell
+	  PHY 88E1512.
+
+config ETH_DWC_EQOS_2_GEN_PHY
+	bool "Generic PHY"
+	select ETH_PHY_GEN_PHY
+	help
+	  Synopsys Ethernet Quality-of-Service port 2 is connected to Generic
+	  PHY.
+
+endchoice
+
+config ETH_DWC_EQOS_2_EEE
+	bool "Port 2 EEE Enable"
+	depends on ETH_DWC_EQOS_2_PHY_88E1512
+	help
+	  EEE is available for PHY 88E1512
+
+config LPI_ENTRY_TIMER_2
+	int "LPI Entry Timer(value must in 8 multiplier micro-seconds)"
+	depends on ETH_DWC_EQOS_2_EEE
+	default 8
+	range 8 1048568
+	help
+	  Time in microseconds the MAC waits to enter LPI mode, after
+	  it has trasmitted all the frames.
+
+rsource "Kconfig.dw_tsn"
+
+endif # ETH_DWC_EQOS
