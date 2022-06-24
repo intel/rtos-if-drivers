@@ -1,0 +1,14 @@
+# Kconfig - INTEL TGPIO configuration options
+#
+#
+# Copyright (c) 2021 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+menuconfig GPIO_TIMED_INTEL
+	bool "Intel Timed GPIO driver"
+	select HAS_INTEL
+	select INTEL_TGPIO
+	help
+	Intel TGPIO driver found on Intel Microcontroller
+	boards
