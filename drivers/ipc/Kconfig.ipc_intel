@@ -1,0 +1,9 @@
+#
+# Copyright (c) 2021 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+menuconfig IPC_INTEL
+	bool "IPC driver for PSE"
+	select HAS_INTEL
