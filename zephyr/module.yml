@@ -1,0 +1,4 @@
+name: zephyr_iotg
+build:
+  cmake: .
+  kconfig: Kconfig.intel

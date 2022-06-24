@@ -1,0 +1,21 @@
+# Copyright (c) 2021 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+---
+description: Intel SPI
+
+compatible: "intel,spi"
+
+include: spi-controller.yaml
+
+properties:
+    reg:
+      required: true
+
+    interrupts:
+      required: true
+
+    peripheral-id:
+      type: int
+      description: Peripheral instance id
+      required: true

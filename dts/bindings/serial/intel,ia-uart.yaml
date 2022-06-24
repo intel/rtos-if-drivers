@@ -1,0 +1,31 @@
+# Copyright (c) 2021 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+---
+description: INTEL PSE UART
+
+compatible: "intel,ia-uart"
+
+include: uart-controller.yaml
+
+properties:
+    reg:
+      required: true
+
+    interrupts:
+      required: true
+
+    peripheral-id:
+      type: int
+      description: peripheral instance for UART
+      required: true
+
+    dma-rx-chnl-id:
+      type: int
+      description: peripheral instance for UART
+      required: true
+
+    dma-tx-chnl-id:
+      type: int
+      description: peripheral instance for UART
+      required: true

@@ -1,0 +1,23 @@
+# Copyright (c) 2021 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+description: Intel Elkhart Lake TGPIO node
+
+compatible: "intel,ia-tgpio"
+
+include: [base.yaml]
+
+properties:
+    reg:
+      required: true
+
+    label:
+      required: true
+
+    interrupts:
+      required: true
+
+    pin-mux:
+      type: int
+      description: Pin multiplexer setting for TGPIO
+      required: true

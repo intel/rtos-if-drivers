@@ -1,0 +1,18 @@
+# Copyright (c) 2021 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+---
+description: INTEL IA DMA controller.
+
+compatible: "intel,ia-dma"
+
+include: dma-controller.yaml
+
+properties:
+    reg:
+      required: true
+
+    peripheral-id:
+      type: int
+      description: peripheral instance in DMA controller.
+      required: true

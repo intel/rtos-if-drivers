@@ -1,0 +1,253 @@
+/*
+ * Copyright (c) 2021 Intel Corporation.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/{
+	soc{
+		dma1: dma@fe050000 {
+			compatible = "intel,ia-dma";
+			reg = <0xfe050000 0x4000>;
+			interrupts = <35 IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			peripheral-id = <1>;
+			label = "DMA_1";
+			interrupt-parent = <&intc>;
+			status = "okay";
+			#dma-cells = <0>;
+                };
+
+		dma2: dma@fe060000 {
+			compatible = "intel,ia-dma";
+			reg = <0xfe060000 0x4000>;
+			interrupts = <36 IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			peripheral-id = <2>;
+			label = "DMA_2";
+			interrupt-parent = <&intc>;
+			status = "okay";
+			#dma-cells = <0>;
+                };
+	};
+
+	pcie0 {
+		label = "PCIE_0";
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "intel,pcie";
+		ranges;
+
+		uart_pse_0: uart@8800 {
+			compatible = "intel,ia-uart";
+
+			reg = <PCIE_BDF(0,0x11,0) PCIE_ID(0x8086,0x4b96)>;
+
+			label = "UART_PSE_0";
+			clock-frequency = <200000000>;
+			interrupts = <PCIE_IRQ_DETECT IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			interrupt-parent = <&intc>;
+			peripheral-id = <0>;
+			dma-rx-chnl-id = <0>;
+			dma-tx-chnl-id = <7>;
+			status = "okay";
+			current-speed = <115200>;
+		};
+
+		uart_pse_1: uart@8900 {
+			compatible = "intel,ia-uart";
+
+			reg = <PCIE_BDF(0,0x11,1) PCIE_ID(0x8086,0x4b97)>;
+
+			label = "UART_PSE_1";
+			clock-frequency = <200000000>;
+			interrupts = <PCIE_IRQ_DETECT IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			interrupt-parent = <&intc>;
+			peripheral-id = <1>;
+			dma-rx-chnl-id = <1>;
+			dma-tx-chnl-id = <6>;
+			status = "okay";
+			current-speed = <115200>;
+		};
+
+		uart_pse_2: uart@8a00 {
+			compatible = "intel,ia-uart";
+
+			reg = <PCIE_BDF(0,0x11,2) PCIE_ID(0x8086,0x4b98)>;
+
+			label = "UART_PSE_2";
+			clock-frequency = <200000000>;
+			interrupts = <PCIE_IRQ_DETECT IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			interrupt-parent = <&intc>;
+			peripheral-id = <2>;
+			dma-rx-chnl-id = <2>;
+			dma-tx-chnl-id = <5>;
+			status = "okay";
+			current-speed = <115200>;
+		};
+
+		uart_pse_3: uart@8b00 {
+			compatible = "intel,ia-uart";
+
+			reg = <PCIE_BDF(0,0x11,3) PCIE_ID(0x8086,0x4b99)>;
+
+			label = "UART_PSE_3";
+			clock-frequency = <200000000>;
+			interrupts = <PCIE_IRQ_DETECT IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			interrupt-parent = <&intc>;
+			peripheral-id = <3>;
+			dma-rx-chnl-id = <3>;
+			dma-tx-chnl-id = <4>;
+			status = "okay";
+			current-speed = <115200>;
+		};
+
+		uart_pse_4: uart@8c00 {
+			compatible = "intel,ia-uart";
+
+			reg = <PCIE_BDF(0,0x11,4) PCIE_ID(0x8086,0x4b9a)>;
+
+			label = "UART_PSE_4";
+			clock-frequency = <200000000>;
+			interrupts = <PCIE_IRQ_DETECT IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			interrupt-parent = <&intc>;
+			peripheral-id = <4>;
+			dma-rx-chnl-id = <4>;
+			dma-tx-chnl-id = <3>;
+			status = "okay";
+			current-speed = <115200>;
+		};
+
+		uart_pse_5: uart@8d00 {
+			compatible = "intel,ia-uart";
+
+			reg = <PCIE_BDF(0,0x11,5) PCIE_ID(0x8086,0x4b9b)>;
+
+			label = "UART_PSE_5";
+			clock-frequency = <200000000>;
+			interrupts = <PCIE_IRQ_DETECT IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			interrupt-parent = <&intc>;
+			peripheral-id = <5>;
+			dma-rx-chnl-id = <5>;
+			dma-tx-chnl-id = <2>;
+			status = "okay";
+			current-speed = <115200>;
+		};
+
+		tgpio0: tgpio@9c00 {
+			compatible = "intel,ia-tgpio";
+			reg = <PCIE_BDF(0,0x13,4) PCIE_ID(0x8086,0x4b88)>;
+			label = "TGPIO_0";
+			interrupts = <PCIE_IRQ_DETECT IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			interrupt-parent = <&intc>;
+			pin-mux = <1>;
+			status = "okay";
+		};
+
+		tgpio1: tgpio@9d00 {
+			compatible = "intel,ia-tgpio";
+			reg = <PCIE_BDF(0,0x13,5) PCIE_ID(0x8086,0x4b89)>;
+			label = "TGPIO_1";
+			interrupts = <PCIE_IRQ_DETECT IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			interrupt-parent = <&intc>;
+			pin-mux = <1>;
+			status = "okay";
+		};
+
+		spi_pse_0: spi@9800 {
+			compatible = "intel,spi";
+			reg = <PCIE_BDF(0,0x13,0) PCIE_ID(0x8086,0x4b84)>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			label = "SPI_PSE_0";
+			clock-frequency = <100000000>;
+			interrupts = <PCIE_IRQ_DETECT IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			interrupt-parent = <&intc>;
+			peripheral-id = <0>;
+			status = "okay";
+		};
+
+		spi_pse_1: spi@9900 {
+			compatible = "intel,spi";
+			reg = <PCIE_BDF(0,0x13,1) PCIE_ID(0x8086,0x4B85)>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			label = "SPI_PSE_1";
+			clock-frequency = <100000000>;
+			interrupts = <PCIE_IRQ_DETECT IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			interrupt-parent = <&intc>;
+			peripheral-id = <1>;
+			status = "okay";
+		};
+
+		ipc_pse_0: ipc@b200 {
+			compatible = "intel,ipc";
+			reg = <PCIE_BDF(0,0x1D,0) PCIE_ID(0x8086,0x4bb3)>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			label = "IPC_PSE_0";
+			timeout-ms = <1000>;
+			interrupts = <PCIE_IRQ_DETECT IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			interrupt-parent = <&intc>;
+			peripheral-id = <0>;
+			status = "okay";
+		};
+
+		pwm0: pwm@a100 {
+			compatible = "intel,ia-pwm";
+			reg = <PCIE_BDF(0,0x1d,6) PCIE_ID(0x8086,0x4bb7)>;
+			label = "PWM_0";
+			status = "okay";
+		};
+
+		emmc: emmc@1a00 {
+			compatible = "intel,ia-emmc";
+			reg = <PCIE_BDF(0,0x1a,0) PCIE_ID(0x8086,0x4b47)>;
+			label = "EMMC";
+			status = "okay";
+		};
+
+		can0: can@2a00 {
+			compatible = "intel,ia-can";
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <PCIE_BDF(0,0x18,1) PCIE_ID(0x8086,0x4bc1)>;
+			interrupts = <PCIE_IRQ_DETECT IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			peripheral-id = <0>;
+			label = "CAN_0";
+			sjw = <4>;
+			bus-speed = <500000>;
+			prop-seg = <1>;
+			phase-seg1 = <10>;
+			phase-seg2 = <7>;
+			sjw-data = <4>;
+			bus-speed-data = <1000000>;
+			prop-seg-data = <1>;
+			phase-seg1-data = <4>;
+			phase-seg2-data = <3>;
+			interrupt-parent = <&intc>;
+			status = "okay";
+		};
+
+		can1: can@2b00 {
+			compatible = "intel,ia-can";
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <PCIE_BDF(0,0x18,2) PCIE_ID(0x8086,0x4bc2)>;
+                        interrupts = <PCIE_IRQ_DETECT IRQ_TYPE_LOWEST_LEVEL_LOW 3>;
+			peripheral-id = <1>;
+			label = "CAN_1";
+			sjw = <4>;
+			bus-speed = <500000>;
+			prop-seg = <1>;
+			phase-seg1 = <10>;
+			phase-seg2 = <7>;
+			sjw-data = <4>;
+			bus-speed-data = <1000000>;
+			prop-seg-data = <1>;
+			phase-seg1-data = <4>;
+			phase-seg2-data = <3>;
+			interrupt-parent = <&intc>;
+			status = "okay";
+		};
+
+	};
+};

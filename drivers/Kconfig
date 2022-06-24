@@ -1,0 +1,15 @@
+# Copyright (c) 2021 Intel Corp.
+# SPDX-License-Identifier: Apache-2.0
+
+menu "Device Drivers"
+
+orsource "$(ARCH)/ethernet/Kconfig"
+rsource "dma/Kconfig"
+rsource "ipc/Kconfig"
+rsource "serial/Kconfig"
+rsource "spi/Kconfig"
+rsource "tgpio/Kconfig"
+rsource "can/Kconfig"
+rsource "pwm/Kconfig"
+rsource "disk/Kconfig"
+endmenu

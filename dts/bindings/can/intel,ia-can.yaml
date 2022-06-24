@@ -1,0 +1,57 @@
+# Copyright (c) 2021 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+description: Intel CAN controller
+
+compatible: "intel,ia-can"
+
+include: can-fd-controller.yaml
+
+properties:
+    reg:
+      type: array
+      description: register base address
+      required: true
+
+    interrupts:
+      type: array
+      required: true
+      description: required interrupts
+
+    peripheral-id:
+      type: int
+      description: peripheral ID
+      required: true
+
+    prop-seg:
+      type: int
+      required: true
+      description: Time quantums of propagation segment (ISO 11898-1)
+
+    phase-seg1:
+      type: int
+      required: true
+      description: Time quantums of phase buffer 1 segment (ISO 11898-1)
+
+    phase-seg2:
+      type: int
+      required: true
+      description: Time quantums of phase buffer 2 segment (ISO 11898-1)
+
+    prop-seg-data:
+      type: int
+      required: true
+      description: Time quantums of propagation segment for the data phase. (ISO11898-1:2015)
+
+    phase-seg1-data:
+      type: int
+      required: true
+      description: Time quantums of phase buffer 1 segment for the data phase. (ISO11898-1:2015)
+
+    phase-seg2-data:
+      type: int
+      required: true
+      description: Time quantums of phase buffer 2 segment for the data phase. (ISO11898-1:2015)
+...
