@@ -1,0 +1,29 @@
+# Kconfig - INTEL DMA configuration options
+#
+#
+# Copyright (c) 2021 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+menuconfig DMA_INTEL
+	bool "Enable INTEL DMA driver"
+	select HAS_DTS_DMA
+	select DMA_64BIT
+	select HAS_INTEL
+	select INTEL_DMA
+	depends on DMA
+	help
+	  INTEL DMA driver.
+
+config LL_SLAB_COUNT
+	int "Link List slab count"
+	default 128
+	help
+	  Number of Linked List Slab count
+
+config BLOCK_SLAB_COUNT
+	int "Block slab count"
+	default 128
+	help
+	  Max number of Block Slab count
