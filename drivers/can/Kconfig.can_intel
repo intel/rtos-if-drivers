@@ -1,0 +1,254 @@
+# Copyright (c) 2021 Intel Corp.
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig CAN_INTEL
+	bool "CAN Driver"
+	select HAS_INTEL
+	select INTEL_CAN
+	select CAN_IOCTL
+	select CAN_INSTANCE
+	help
+	  This option enables the CAN driver.
+	  This driver is shim driver based on the CAN driver
+	  provided by the HAL.
+
+config FD_MODE
+	bool "Enable CAN FD mode"
+	default n
+	select CAN_HAS_CANFD
+	depends on CAN_INTEL
+	help
+	  Enable CAM FD mode
+
+config SOCKET_CAN
+	bool "Enable socket CAN support"
+	depends on CAN_INTEL
+	help
+	  Enable Socket CAN support
+
+if CAN_INTEL
+
+config CAN_RX_TIMESTAMP
+	bool "Support for timestamping in received CAN frames"
+	default y
+	help
+	Enable support for timestamping in received CAN frames
+
+config CAN_BRP
+	int "brp"
+	default 19
+	range 0 31
+
+config CAN_FAST_BRP
+	int "fast_brp"
+	default 19
+	range 0 31
+
+config CAN_DISABLE_AUTO_RETRANSMIT
+	bool  "Disable auto retransmit for tx failures"
+	help
+	  Define auto retransmit behaviour for tx failures
+
+config CAN0_STD_FILTER_COUNT
+	int "can0_std_filter_cnt"
+	default 128
+	range 0 128
+
+config CAN0_EXT_FILTER_COUNT
+	int "can0_ext_filter_cnt"
+	default 64
+	range 0 64
+
+config CAN0_RX_FIFO0_COUNT
+	int "can0_rx_fifo0_cnt"
+	default 64
+	range 0 64
+
+config CAN0_RX_FIFO1_COUNT
+	int "can0_rx_fifo1_cnt"
+	default 0
+	range 0 64
+
+config CAN0_RX_BUF_COUNT
+	int "can0_rx_buf_cnt"
+	default 64
+	range 0 64
+
+config CAN0_TX_EVENT_FIFO_COUNT
+	int "can0_tx_evt_fifo_cnt"
+	default 0
+	range 0 32
+
+config CAN0_TX_BUF_COUNT
+	int "can0_tx_buf_cnt"
+	default 16
+	range 0 32
+	help
+	  Total count for TX BUF and TX FIFO should not more than 32
+
+config CAN0_TX_FIFO_COUNT
+	int "can0_tx_fifo_cnt"
+	default 16
+	range 0 32
+	help
+	  Total count for TX BUF and TX FIFO should not more than 32
+
+config CAN0_RX_FIFO0_SIZE
+	int "can0_rx_fifo0_size"
+	default 64
+	range 8 64
+	help
+	  Size of buffer elements in FIFO valid values are 8 12 16 20 24 32 48 64
+
+config CAN0_RX_FIFO1_SIZE
+	int "can0_rx_fifo1_size"
+	default 8
+	range 8 64
+	help
+	  Size of buffer elements in FIFO valid values are 8 12 16 20 24 32 48 64
+
+config CAN0_RX_BUF_SIZE
+	int "can0_rx_buf_size"
+	default 64
+	range 8 64
+	help
+	  Size of RX buffer elements valid values are 8 12 16 20 24 32 48 64
+
+config CAN0_TX_BUF_SIZE
+	int "can0_tx_buf_size"
+	default 64
+	range 8 64
+	help
+	  Size of TX buffer elements valid values are 8 12 16 20 24 32 48 64
+
+config CAN0_RX_FIFO0_WM
+	int "can0_rx_fifo0_wm"
+	default 2
+	range 0 64
+
+config CAN0_RX_FIFO1_WM
+	int "can0_rx_fifo1_wm"
+	default 2
+	range 0 64
+
+config CAN0_TX_EVT_FIFO_WM
+	int "can0_tx_evt_fifo_wm"
+	default 1
+	range 0 32
+
+config CAN0_GFC_REJECT
+	int "can0_gfc_reject"
+	default 0
+	range 0 1
+
+config CAN0_GFC_REMOTE_REJECT
+	int "can0_gfc_remote_reject"
+	default 0
+	range 0 1
+
+config CAN0_TIME_COUNT
+	int "can0_time_counter"
+	default 1
+
+config CAN1_STD_FILTER_COUNT
+	int "can1_std_filter_cnt"
+	default 32
+	range 0 32
+
+config CAN1_EXT_FILTER_COUNT
+	int "can1_ext_filter_cnt"
+	default 32
+	range 0 32
+
+config CAN1_RX_FIFO0_COUNT
+	int "can1_rx_fifo0_cnt"
+	default 32
+	range 0 32
+
+config CAN1_RX_FIFO1_COUNT
+	int "can1_rx_fifo1_cnt"
+	default 4
+	range 0 32
+
+config CAN1_RX_BUF_COUNT
+	int "can1_rx_buf_cnt"
+	default 32
+	range 0 32
+
+config CAN1_TX_EVENT_FIFO_COUNT
+	int "can1_tx_evt_fifo_cnt"
+	default 1
+	range 0 32
+
+config CAN1_TX_BUF_COUNT
+	int "can1_tx_buf_cnt"
+	default 16
+	range 0 32
+	help
+	  Total count for TX BUF and TX FIFO should not more than 32
+
+config CAN1_TX_FIFO_COUNT
+	int "can1_tx_fifo_cnt"
+	default 16
+	range 0 32
+	help
+	  Total count for TX BUF and TX FIFO should not more than 32
+
+config CAN1_RX_FIFO0_SIZE
+	int "can1_rx_fifo0_size"
+	default 64
+	range 8 64
+	help
+	  Size of buffer elements in FIFO valid values are 8 12 16 20 24 32 48 64
+
+config CAN1_RX_FIFO1_SIZE
+	int "can1_rx_fifo1_size"
+	default 64
+	range 8 64
+	help
+	  Size of buffer elements in FIFO valid values are 8 12 16 20 24 32 48 64
+
+config CAN1_RX_BUF_SIZE
+	int "can1_rx_buf_size"
+	default 64
+	range 8 64
+	help
+	  Size of RX buffer elements valid values are 8 12 16 20 24 32 48 64
+
+config CAN1_TX_BUF_SIZE
+	int "can1_tx_buf_size"
+	default 64
+	range 8 64
+	help
+	  Size of TX buffer elements valid values are 8 12 16 20 24 32 48 64
+
+config CAN1_RX_FIFO0_WM
+	int "can1_rx_fifo0_wm"
+	default 2
+	range 0 32
+
+config CAN1_RX_FIFO1_WM
+	int "can1_rx_fifo1_wm"
+	default 2
+	range 0 32
+
+config CAN1_TX_EVT_FIFO_WM
+	int "can1_tx_evt_fifo_wm"
+	default 1
+	range 0 32
+
+config CAN1_GFC_REJECT
+	int "can1_gfc_reject"
+	default 0
+	range 0 1
+
+config CAN1_GFC_REMOTE_REJECT
+	int "can1_gfc_remote_reject"
+	default 0
+	range 0 1
+
+config CAN1_TIME_COUNT
+	int "can1_time_counter"
+	default 1
+
+endif #CAN_INTEL

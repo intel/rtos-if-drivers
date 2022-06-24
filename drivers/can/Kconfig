@@ -1,0 +1,14 @@
+# Copyright (c) 2021 Intel Corp.
+# SPDX-License-Identifier: Apache-2.0
+
+config CAN_IOCTL
+	bool "ioctl support for CAN"
+	help
+	Enable ioctl support for CAN
+
+config CAN_INSTANCE
+	bool "Support for can instance when multiple instances present"
+	help
+	Enable support for can instance when multiple instances present
+
+rsource "Kconfig.can_intel"
