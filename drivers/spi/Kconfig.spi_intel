@@ -17,3 +17,11 @@ config SPI_INTEL_USE_DMA
 	 This option enables UART DMA feature to be used for asynchrounous
 	 data transfers. All Tx operaton are done using dma channel 0 and
 	 all Rx operations are done using dma channel 1.
+
+config SPI_INTEL_POLLED_MODE
+	depends on SPI_INTEL
+	bool "USE SPI polled mode synchronous Transfers"
+	default y
+	help
+	 This option enables SPI feature to be used for synchronous
+	 data transfers using polled mode.
